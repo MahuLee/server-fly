@@ -1,0 +1,284 @@
+/* 监控详情抽屉样式 */
+
+.metrics-detail-drawer {
+  position: fixed;
+  top: 0;
+  right: -600px;
+  width: 600px;
+  height: 100vh;
+  background: var(--bg-primary);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+  transition: right 0.3s ease;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.metrics-detail-drawer.open {
+  right: 0;
+}
+
+/* 抽屉头部 */
+.metrics-detail-drawer .drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-primary);
+  background: var(--bg-secondary);
+}
+
+.metrics-detail-drawer .header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.metrics-detail-drawer .header-info h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.metrics-detail-drawer .node-type-badge {
+  padding: 2px 8px;
+  font-size: 12px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 4px;
+}
+
+.metrics-detail-drawer .close-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s;
+}
+
+.metrics-detail-drawer .close-btn:hover {
+  color: var(--text-primary);
+}
+
+/* 抽屉内容 */
+.metrics-detail-drawer .drawer-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+/* 区块标题 */
+.metrics-detail-drawer .metrics-section,
+.metrics-detail-drawer .trend-section {
+  margin-bottom: 32px;
+}
+
+.metrics-detail-drawer h4 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* 实时指标卡片 */
+.metrics-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.metric-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  padding: 16px;
+  transition: box-shadow 0.2s;
+}
+
+.metric-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.metric-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.status-badge {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.status-badge.warning {
+  background: #fff7e6;
+  color: #faad14;
+  border: 1px solid #ffd591;
+}
+
+.status-badge.critical {
+  background: #fff1f0;
+  color: #ff4d4f;
+  border: 1px solid #ffccc7;
+}
+
+.metric-value {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.metric-value .value {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.metric-value .unit {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.metric-timestamp {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+}
+
+.mini-chart {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  background: var(--bg-primary);
+  padding: 4px;
+  border-radius: 4px;
+}
+
+/* 历史趋势区 */
+.trend-section .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.time-range-selector {
+  display: flex;
+  gap: 8px;
+}
+
+.range-btn {
+  padding: 4px 12px;
+  border: 1px solid var(--border-primary);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.range-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.range-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.trend-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.trend-chart-container {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.trend-chart-container h5 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-tertiary);
+}
+
+.empty-state p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+}
+
+.empty-state small {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+/* 加载状态 */
+.loading-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+}
+
+.loading-state p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .metrics-detail-drawer {
+    width: 100%;
+    right: -100%;
+  }
+
+  .metrics-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 滚动条样式 */
+.metrics-detail-drawer .drawer-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.metrics-detail-drawer .drawer-content::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+.metrics-detail-drawer .drawer-content::-webkit-scrollbar-thumb {
+  background: var(--border-primary);
+  border-radius: 3px;
+}
+
+.metrics-detail-drawer .drawer-content::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}

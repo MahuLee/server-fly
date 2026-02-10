@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+[data-theme="minimalist"] body {
+  font-family: 'Quicksand', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 科技字体 */
+.tech-font {
+  font-family: 'Orbitron', monospace;
+}
+
+/* 滚动条样式 - 科技黑 */
+[data-theme="tech-dark"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-theme="tech-dark"] ::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+[data-theme="tech-dark"] ::-webkit-scrollbar-thumb {
+  background: var(--border-secondary);
+  border-radius: 4px;
+}
+
+[data-theme="tech-dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+  box-shadow: var(--glow-primary);
+}
+
+/* 滚动条样式 - 简约活力 */
+[data-theme="minimalist"] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+[data-theme="minimalist"] ::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, #e0f2fe 0%, #ccfbf1 100%);
+  border-radius: 5px;
+}
+
+[data-theme="minimalist"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0ea5e9 0%, #14b8a6 100%);
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+[data-theme="minimalist"] ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #0284c7 0%, #0d9488 100%);
+  background-clip: padding-box;
+  box-shadow: 0 0 8px rgba(14, 165, 233, 0.4);
+}

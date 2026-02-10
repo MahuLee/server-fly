@@ -1,0 +1,229 @@
+.monitoring-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.monitoring-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e8e8e8;
+  background: #fafafa;
+}
+
+.monitoring-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.monitoring-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.monitoring-controls label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #595959;
+  cursor: pointer;
+}
+
+.monitoring-controls input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.refresh-interval-select {
+  padding: 4px 8px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.refresh-btn {
+  padding: 6px 16px;
+  background: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.refresh-btn:hover:not(:disabled) {
+  background: #40a9ff;
+}
+
+.refresh-btn:disabled {
+  background: #d9d9d9;
+  cursor: not-allowed;
+}
+
+.monitoring-empty,
+.monitoring-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: #8c8c8c;
+}
+
+.monitoring-error {
+  color: #ff4d4f;
+  background: #fff2f0;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.monitoring-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+/* 当前指标 */
+.metrics-current {
+  margin-bottom: 24px;
+}
+
+.metrics-current h4 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.metric-card {
+  padding: 16px;
+  background: #fafafa;
+  border: 2px solid #e8e8e8;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.metric-card:hover {
+  border-color: #1890ff;
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2);
+}
+
+.metric-card.selected {
+  border-color: #1890ff;
+  background: #e6f7ff;
+}
+
+.metric-card.metric-warning {
+  border-color: #faad14;
+  background: #fffbe6;
+}
+
+.metric-card.metric-critical {
+  border-color: #ff4d4f;
+  background: #fff2f0;
+}
+
+.metric-name {
+  font-size: 14px;
+  color: #8c8c8c;
+  margin-bottom: 8px;
+}
+
+.metric-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: #262626;
+  margin-bottom: 4px;
+}
+
+.metric-violation {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+.metric-card.metric-warning .metric-violation {
+  background: #faad14;
+  color: white;
+}
+
+.metric-card.metric-critical .metric-violation {
+  background: #ff4d4f;
+  color: white;
+}
+
+.metric-time {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+/* 历史图表 */
+.metrics-chart {
+  margin-top: 24px;
+}
+
+.metrics-chart h4 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #262626;
+}
+
+.chart-container {
+  height: 300px;
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 8px;
+  border: 1px solid #e8e8e8;
+}
+
+.no-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #8c8c8c;
+  font-size: 14px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .monitoring-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .monitoring-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-container {
+    height: 250px;
+  }
+}

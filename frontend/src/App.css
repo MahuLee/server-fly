@@ -1,0 +1,477 @@
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  overflow: hidden;
+}
+
+/* ============================================
+   Header - 科技感导航栏
+   ============================================ */
+.App-header {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  border-bottom: 1px solid var(--border-primary);
+  position: relative;
+  z-index: 100;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+[data-theme="tech-dark"] .App-header {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(74, 144, 226, 0.1);
+}
+
+[data-theme="minimalist"] .App-header {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.08);
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, #0ea5e9 0%, #14b8a6 100%);
+  border-image-slice: 1;
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+[data-theme="tech-dark"] .App-header h1 {
+  font-family: 'Orbitron', monospace;
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(74, 144, 226, 0.5);
+  letter-spacing: 1px;
+}
+
+[data-theme="minimalist"] .App-header h1 {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.App-header h1::before {
+  font-size: 28px;
+}
+
+[data-theme="tech-dark"] .App-header h1::before {
+  filter: drop-shadow(0 0 10px rgba(74, 144, 226, 0.8));
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* 导航按钮样式已移至 MainMenu.css */
+
+/* 主题切换器 - 滑块样式 */
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 20px;
+}
+
+.theme-switch {
+  position: relative;
+  width: 56px;
+  height: 28px;
+  background: var(--border-secondary);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid var(--border-primary);
+}
+
+[data-theme="tech-dark"] .theme-switch {
+  background: rgba(74, 144, 226, 0.2);
+  border-color: var(--border-secondary);
+}
+
+[data-theme="minimalist"] .theme-switch {
+  background: linear-gradient(135deg, #e0f2fe 0%, #ccfbf1 100%);
+  border-color: var(--color-primary);
+}
+
+.theme-switch:hover {
+  border-color: var(--color-primary);
+}
+
+[data-theme="tech-dark"] .theme-switch:hover {
+  box-shadow: var(--glow-primary);
+}
+
+.theme-switch-slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: var(--bg-elevated);
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="tech-dark"] .theme-switch-slider {
+  left: 30px;
+  background: var(--color-primary);
+  box-shadow: var(--glow-primary);
+}
+
+[data-theme="minimalist"] .theme-switch-slider {
+  background: linear-gradient(135deg, #0ea5e9 0%, #14b8a6 100%);
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
+}
+
+.theme-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  min-width: 60px;
+}
+
+[data-theme="tech-dark"] .theme-label {
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 0.5px;
+}
+
+/* 连接状态指示器 */
+.connection-status {
+  padding: 8px 16px;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.connection-status.connected {
+  background: transparent;
+  color: var(--color-success);
+}
+
+[data-theme="tech-dark"] .connection-status.connected {
+  background: transparent;
+}
+
+[data-theme="minimalist"] .connection-status.connected {
+  background: transparent;
+}
+
+.connection-status.disconnected {
+  background: transparent;
+  color: var(--color-error);
+}
+
+[data-theme="tech-dark"] .connection-status.disconnected {
+  background: transparent;
+}
+
+[data-theme="minimalist"] .connection-status.disconnected {
+  background: transparent;
+}
+
+/* 连接图标 */
+.connection-icon {
+  display: block;
+}
+
+/* 心跳折线 - 绿色，带发光效果 */
+.connection-status.connected .heartbeat-line {
+  filter: drop-shadow(0 0 3px #10b981);
+}
+
+[data-theme="tech-dark"] .connection-status.connected .heartbeat-line {
+  filter: drop-shadow(0 0 4px #10b981) drop-shadow(0 0 8px rgba(16, 185, 129, 0.5));
+}
+
+[data-theme="minimalist"] .connection-status.connected .heartbeat-line {
+  filter: drop-shadow(0 0 2px #10b981);
+}
+
+/* 直线 - 红色，带发光效果 */
+.connection-status.disconnected .flatline {
+  filter: drop-shadow(0 0 3px #dc2626);
+}
+
+[data-theme="tech-dark"] .connection-status.disconnected .flatline {
+  filter: drop-shadow(0 0 4px #dc2626) drop-shadow(0 0 8px rgba(220, 38, 38, 0.5));
+}
+
+[data-theme="minimalist"] .connection-status.disconnected .flatline {
+  filter: drop-shadow(0 0 2px #dc2626);
+}
+
+/* 直线光点 - 淡白色发光 */
+.connection-status.disconnected .flatline-dot {
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+}
+
+[data-theme="tech-dark"] .connection-status.disconnected .flatline-dot {
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 14px rgba(220, 38, 38, 0.4));
+}
+
+[data-theme="minimalist"] .connection-status.disconnected .flatline-dot {
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+/* ============================================
+   Content Area
+   ============================================ */
+.App-content {
+  flex: 1;
+  display: flex;
+  background: var(--bg-primary);
+  overflow: hidden;
+  position: relative;
+}
+
+[data-theme="tech-dark"] .App-content {
+  background: var(--gradient-bg);
+}
+
+[data-theme="minimalist"] .App-content {
+  background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 50%, #f0fdfa 100%);
+  background-size: 200% 200%;
+  animation: freshGradient 15s ease infinite;
+}
+
+@keyframes freshGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 侧边栏容器 */
+.sidebar-container {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-container.visible {
+  width: 300px;
+}
+
+.sidebar-container.hidden {
+  width: 0;
+}
+
+/* 侧边栏 */
+.sidebar {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 300px;
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-primary);
+  padding: 20px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar-container.hidden .sidebar {
+  opacity: 0;
+  pointer-events: none;
+}
+
+[data-theme="tech-dark"] .sidebar {
+  background: rgba(20, 27, 58, 0.8);
+  backdrop-filter: blur(10px);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="minimalist"] .sidebar {
+  background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+  box-shadow: 2px 0 12px rgba(14, 165, 233, 0.08);
+  border-right: 2px solid transparent;
+  border-image: linear-gradient(180deg, #0ea5e9 0%, #14b8a6 100%);
+  border-image-slice: 1;
+}
+
+/* 侧边栏切换按钮 */
+.sidebar-toggle-btn {
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 64px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: var(--text-secondary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="tech-dark"] .sidebar-toggle-btn {
+  background: rgba(31, 41, 82, 0.9);
+  backdrop-filter: blur(10px);
+  border-color: var(--border-secondary);
+}
+
+[data-theme="minimalist"] .sidebar-toggle-btn {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+  border-color: var(--color-primary);
+}
+
+.sidebar-toggle-btn:hover {
+  background: var(--bg-hover);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: translateY(-50%) translateX(2px);
+}
+
+[data-theme="tech-dark"] .sidebar-toggle-btn:hover {
+  box-shadow: 0 0 20px rgba(74, 144, 226, 0.4), 2px 0 12px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="minimalist"] .sidebar-toggle-btn:hover {
+  box-shadow: 0 0 12px rgba(14, 165, 233, 0.3);
+}
+
+.sidebar-toggle-btn svg {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  display: block;
+}
+
+.sidebar-container.hidden .sidebar-toggle-btn {
+  right: -8px;
+}
+
+/* 主内容区 */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.empty-workspace {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--text-tertiary);
+  font-size: 18px;
+  flex-direction: column;
+  gap: 16px;
+}
+
+[data-theme="tech-dark"] .empty-workspace {
+  font-family: 'Orbitron', monospace;
+}
+
+.empty-workspace::before {
+  content: '🚀';
+  font-size: 64px;
+  opacity: 0.5;
+  animation: float 3s ease-in-out infinite;
+}
+
+[data-theme="minimalist"] .empty-workspace::before {
+  filter: drop-shadow(0 4px 12px rgba(14, 165, 233, 0.3));
+  opacity: 0.8;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Workspace Layout */
+.workspace {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.workspace-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 1200px) {
+  .App-header {
+    padding: 0 16px;
+    height: 64px;
+  }
+
+  .App-header h1 {
+    font-size: 18px;
+  }
+
+  .App-content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-primary);
+    max-height: 300px;
+  }
+
+  .theme-switcher {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .App-header h1::before {
+    display: none;
+  }
+
+  .theme-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+}

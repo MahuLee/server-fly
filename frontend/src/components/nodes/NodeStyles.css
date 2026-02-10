@@ -1,0 +1,356 @@
+/* 自定义节点样式 */
+.custom-node {
+  cursor: move;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--card-shadow);
+}
+
+.custom-node.selected {
+  box-shadow: 0 0 0 2px var(--color-primary), var(--card-shadow-hover);
+}
+
+[data-theme="tech-dark"] .custom-node.selected {
+  box-shadow: 0 0 0 2px var(--color-primary), var(--glow-primary), var(--card-shadow-hover);
+}
+
+.custom-node:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* Handle 样式 - 默认隐藏 */
+.custom-handle {
+  width: 8px;
+  height: 8px;
+  background: var(--color-primary);
+  border: 2px solid var(--bg-secondary);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+[data-theme="tech-dark"] .custom-handle {
+  background: var(--color-primary);
+  border-color: var(--bg-primary);
+  box-shadow: var(--glow-primary);
+}
+
+.custom-handle:hover {
+  width: 10px;
+  height: 10px;
+  background: var(--color-primary-hover);
+  transform: scale(1.2);
+}
+
+[data-theme="tech-dark"] .custom-handle:hover {
+  box-shadow: 0 0 12px var(--color-primary);
+}
+
+/* 服务节点样式 */
+.service-node {
+  background: var(--bg-elevated);
+  border: 2px solid var(--border-primary);
+  border-radius: var(--border-radius-md);
+  padding: 6px;
+}
+
+[data-theme="tech-dark"] .service-node {
+  background: rgba(31, 41, 82, 0.8);
+  backdrop-filter: blur(10px);
+  border-color: var(--border-secondary);
+}
+
+[data-theme="minimalist"] .service-node {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-color: rgba(14, 165, 233, 0.3);
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.08);
+}
+
+.service-node.status-running {
+  border-color: var(--color-success);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, var(--bg-elevated) 100%);
+}
+
+[data-theme="tech-dark"] .service-node.status-running {
+  border-color: var(--color-success);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(31, 41, 82, 0.8) 100%);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+[data-theme="minimalist"] .service-node.status-running {
+  border-color: var(--color-success);
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  box-shadow: 0 2px 12px rgba(34, 197, 94, 0.15);
+}
+
+.service-node.status-error {
+  border-color: var(--color-error);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, var(--bg-elevated) 100%);
+}
+
+[data-theme="tech-dark"] .service-node.status-error {
+  border-color: var(--color-error);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(31, 41, 82, 0.8) 100%);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+}
+
+[data-theme="minimalist"] .service-node.status-error {
+  border-color: var(--color-error);
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  box-shadow: 0 2px 12px rgba(239, 68, 68, 0.15);
+}
+
+.service-node.status-warning {
+  border-color: var(--color-warning);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, var(--bg-elevated) 100%);
+}
+
+[data-theme="tech-dark"] .service-node.status-warning {
+  border-color: var(--color-warning);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(31, 41, 82, 0.8) 100%);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+}
+
+[data-theme="minimalist"] .service-node.status-warning {
+  border-color: var(--color-warning);
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  box-shadow: 0 2px 12px rgba(245, 158, 11, 0.15);
+}
+
+.service-node.status-unknown {
+  border-color: var(--border-secondary);
+}
+
+/* 服务器节点样式 */
+.server-node {
+  background: transparent !important;
+  border: 3px dashed rgba(150, 150, 150, 0.3);
+  border-radius: var(--border-radius-md);
+  padding: 6px;
+  opacity: 1;
+  box-shadow: none !important;
+  cursor: default;
+}
+
+[data-theme="tech-dark"] .server-node {
+  background: transparent !important;
+  border-color: rgba(150, 150, 150, 0.3);
+}
+
+.server-node.selected {
+  opacity: 1;
+  border: 3px dashed var(--color-primary) !important;
+  box-shadow: 0 0 0 1px var(--color-primary) !important;
+}
+
+[data-theme="tech-dark"] .server-node.selected {
+  box-shadow: 0 0 0 1px var(--color-primary), var(--glow-primary) !important;
+}
+
+.server-node:hover {
+  transform: none;
+  box-shadow: none !important;
+}
+
+/* 节点内容样式 */
+.node-icon {
+  font-size: 16px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  flex-shrink: 0;
+}
+
+[data-theme="tech-dark"] .node-icon {
+  filter: drop-shadow(0 0 8px rgba(74, 144, 226, 0.3));
+}
+
+[data-theme="minimalist"] .node-icon {
+  filter: drop-shadow(0 2px 4px rgba(14, 165, 233, 0.2));
+}
+
+.node-label {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+[data-theme="tech-dark"] .node-label {
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 0.5px;
+}
+
+.node-sublabel {
+  font-size: 10px;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 2px;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 状态指示器 */
+.node-status-indicator {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.node-status-indicator.running {
+  background: var(--color-success);
+  box-shadow: 0 0 12px var(--color-success);
+}
+
+.node-status-indicator.error {
+  background: var(--color-error);
+  box-shadow: 0 0 12px var(--color-error);
+}
+
+.node-status-indicator.warning {
+  background: var(--color-warning);
+  box-shadow: 0 0 12px var(--color-warning);
+}
+
+.node-status-indicator.unknown {
+  background: var(--text-tertiary);
+  box-shadow: none;
+  animation: none;
+}
+
+/* React Flow Resizer 样式 */
+.react-flow__resize-control.handle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid var(--bg-secondary);
+}
+
+[data-theme="tech-dark"] .react-flow__resize-control.handle {
+  background: var(--color-primary);
+  border-color: var(--bg-primary);
+  box-shadow: var(--glow-primary);
+}
+
+.react-flow__resize-control.handle:hover {
+  background: var(--color-primary-hover);
+  transform: scale(1.3);
+}
+
+/* 数据库节点样式 */
+.database-node {
+  background: var(--bg-elevated);
+  border: 2px solid var(--color-info);
+  border-radius: var(--border-radius-md);
+  padding: 6px;
+}
+
+[data-theme="tech-dark"] .database-node {
+  background: rgba(31, 41, 82, 0.8);
+  backdrop-filter: blur(10px);
+  border-color: var(--color-info);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+[data-theme="minimalist"] .database-node {
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 2px 8px rgba(168, 85, 247, 0.1);
+}
+
+/* 通用节点样式 */
+.generic-node {
+  background: var(--bg-elevated);
+  border: 2px solid var(--border-primary);
+  border-radius: var(--border-radius-md);
+  padding: 6px;
+}
+
+[data-theme="tech-dark"] .generic-node {
+  background: rgba(31, 41, 82, 0.8);
+  backdrop-filter: blur(10px);
+  border-color: var(--border-secondary);
+}
+
+[data-theme="minimalist"] .generic-node {
+  background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+  border-color: rgba(20, 184, 166, 0.3);
+  box-shadow: 0 2px 8px rgba(20, 184, 166, 0.08);
+}
+
+/* 群组节点样式 */
+.group-node {
+  background: transparent !important;
+  border-radius: 8px !important;
+  padding: 12px;
+  opacity: 1;
+  box-shadow: none !important;
+  cursor: default;
+  outline: none !important;
+}
+
+[data-theme="tech-dark"] .group-node {
+  background: transparent !important;
+}
+
+.group-node.selected {
+  opacity: 1;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+[data-theme="tech-dark"] .group-node.selected {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.group-node:hover {
+  transform: none;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* 覆盖 React Flow 对群组节点的选中样式 */
+.react-flow__node.selected .group-node {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.react-flow__node-group.selected {
+  box-shadow: none !important;
+  outline: none !important;
+  border: none !important;
+}
+
+.react-flow__node-group {
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* 强制移除群组节点的所有边框 */
+.react-flow__node[data-type="group"],
+.react-flow__node-group,
+div[data-type="group"] {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+}
+
+.react-flow__node[data-type="group"].selected,
+.react-flow__node-group.selected,
+div[data-type="group"].selected {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}

@@ -1,0 +1,368 @@
+/* ============================================
+   主题系统 - 科技黑 & 简约白
+   ============================================ */
+
+:root {
+  /* 通用变量 */
+  --transition-speed: 0.3s;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   科技黑主题 (Tech Dark)
+   ============================================ */
+[data-theme="tech-dark"] {
+  /* 背景色 */
+  --bg-primary: #0a0e27;
+  --bg-secondary: #141b3a;
+  --bg-tertiary: #1a2347;
+  --bg-elevated: #1f2952;
+  --bg-hover: #252f5c;
+  
+  /* 文字色 */
+  --text-primary: #e8eaed;
+  --text-secondary: #9aa0b8;
+  --text-tertiary: #6b7280;
+  --text-inverse: #0a0e27;
+  
+  /* 边框色 */
+  --border-primary: #2d3a5f;
+  --border-secondary: #3d4a6f;
+  --border-accent: #4a90e2;
+  
+  /* 主题色 - 科技蓝紫渐变 */
+  --color-primary: #4a90e2;
+  --color-primary-hover: #5ba3ff;
+  --color-primary-active: #3a7bc8;
+  --color-secondary: #7c3aed;
+  --color-secondary-hover: #8b5cf6;
+  
+  /* 状态色 */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+  
+  /* 渐变 */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-secondary: linear-gradient(135deg, #4a90e2 0%, #7c3aed 100%);
+  --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-bg: linear-gradient(180deg, #0a0e27 0%, #141b3a 100%);
+  
+  /* 发光效果 */
+  --glow-primary: 0 0 20px rgba(74, 144, 226, 0.3);
+  --glow-secondary: 0 0 20px rgba(124, 58, 237, 0.3);
+  --glow-success: 0 0 20px rgba(16, 185, 129, 0.3);
+  
+  /* 网格背景 */
+  --grid-color: rgba(74, 144, 226, 0.1);
+  
+  /* 卡片阴影 */
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --card-shadow-hover: 0 8px 30px rgba(74, 144, 226, 0.2);
+}
+
+/* ============================================
+   简约白主题 (Minimalist Light) - 清新有活力
+   ============================================ */
+[data-theme="minimalist"] {
+  /* 背景色 - 清新渐变 */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  --bg-elevated: #ffffff;
+  --bg-hover: #e0f2fe;
+  
+  /* 文字色 - 清晰对比 */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-tertiary: #64748b;
+  --text-inverse: #ffffff;
+  
+  /* 边框色 - 柔和边界 */
+  --border-primary: #e2e8f0;
+  --border-secondary: #cbd5e0;
+  --border-accent: #0ea5e9;
+  
+  /* 主题色 - 活力青蓝 + 翠绿 */
+  --color-primary: #0ea5e9;
+  --color-primary-hover: #0284c7;
+  --color-primary-active: #0369a1;
+  --color-secondary: #14b8a6;
+  --color-secondary-hover: #0d9488;
+  
+  /* 状态色 - 鲜明活力 */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #06b6d4;
+  
+  /* 渐变 - 清新活力 */
+  --gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+  --gradient-secondary: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
+  --gradient-accent: linear-gradient(135deg, #f472b6 0%, #fb923c 100%);
+  --gradient-bg: linear-gradient(180deg, #f8fafc 0%, #e0f2fe 100%);
+  --gradient-card: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+  
+  /* 发光效果 - 柔和光晕 */
+  --glow-primary: 0 0 24px rgba(14, 165, 233, 0.2);
+  --glow-secondary: 0 0 24px rgba(20, 184, 166, 0.2);
+  --glow-success: 0 0 24px rgba(34, 197, 94, 0.2);
+  
+  /* 网格背景 */
+  --grid-color: rgba(14, 165, 233, 0.08);
+  
+  /* 卡片阴影 - 轻盈立体 */
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(14, 165, 233, 0.05);
+  --card-shadow-hover: 0 8px 24px rgba(14, 165, 233, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================
+   主题切换动画
+   ============================================ */
+* {
+  transition: background-color var(--transition-speed) ease,
+              border-color var(--transition-speed) ease,
+              color var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease;
+}
+
+/* 禁用某些元素的过渡 */
+.react-flow__node,
+.react-flow__edge,
+input,
+textarea,
+select {
+  transition: none;
+}
+
+/* ============================================
+   科技黑主题特效
+   ============================================ */
+[data-theme="tech-dark"] .tech-glow {
+  position: relative;
+}
+
+[data-theme="tech-dark"] .tech-glow::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: var(--gradient-secondary);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+  filter: blur(10px);
+}
+
+[data-theme="tech-dark"] .tech-glow:hover::before {
+  opacity: 0.6;
+}
+
+/* 扫描线效果 */
+[data-theme="tech-dark"] .scan-line {
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="tech-dark"] .scan-line::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(74, 144, 226, 0.1) 50%,
+    transparent 100%
+  );
+  animation: scan 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* 网格背景动画 */
+[data-theme="tech-dark"] .grid-bg {
+  background-image: 
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 20px 20px;
+  }
+}
+
+/* ============================================
+   简约主题特效 - 清新活力
+   ============================================ */
+[data-theme="minimalist"] .minimalist-card {
+  background: var(--gradient-card);
+  border: 1px solid var(--border-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="minimalist"] .minimalist-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--color-primary);
+}
+
+/* 活力按钮效果 */
+[data-theme="minimalist"] .btn-primary {
+  background: var(--gradient-primary);
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="minimalist"] .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.35);
+}
+
+/* 清新波纹效果 */
+[data-theme="minimalist"] .ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="minimalist"] .ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(14, 165, 233, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+[data-theme="minimalist"] .ripple:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* 活力脉动动画 */
+@keyframes vibrantPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(14, 165, 233, 0);
+  }
+}
+
+[data-theme="minimalist"] .vibrant-pulse {
+  animation: vibrantPulse 2s ease-in-out infinite;
+}
+
+/* 清新渐变背景 */
+[data-theme="minimalist"] .fresh-bg {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdfa 100%);
+  background-size: 200% 200%;
+  animation: freshGradient 8s ease infinite;
+}
+
+@keyframes freshGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 渐变文字 */
+.gradient-text {
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* ============================================
+   通用动画
+   ============================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
