@@ -3,6 +3,7 @@
   flex-direction: column;
   flex: 1;
   min-height: 0;
+  max-height: 100%;
   background: var(--bg-elevated);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--card-shadow);
@@ -110,12 +111,12 @@
 .node-library-content {
   flex: 1;
   min-height: 0;
-  padding: 16px;
+  padding: 12px;
   overflow-y: auto;
   overflow-x: hidden;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 10px;
   align-content: start;
 }
 
@@ -124,7 +125,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px 12px;
+  padding: 14px 8px;
   border: 2px solid var(--border-primary);
   border-radius: var(--border-radius-md);
   background: var(--bg-secondary);
@@ -186,8 +187,8 @@
 }
 
 .node-library-item-icon {
-  font-size: 36px;
-  margin-bottom: 10px;
+  font-size: 28px;
+  margin-bottom: 6px;
   line-height: 1;
   position: relative;
   z-index: 1;
@@ -246,18 +247,22 @@
 
 /* 响应式设计 */
 @media (max-width: 768px) {
+  .node-library-panel {
+    width: 200px;
+  }
+
   .node-library-content {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    padding: 12px;
+    gap: 8px;
+    padding: 10px;
   }
 
   .node-library-item {
-    padding: 16px 8px;
+    padding: 12px 6px;
   }
 
   .node-library-item-icon {
-    font-size: 28px;
+    font-size: 24px;
   }
 
   .node-library-item-label {

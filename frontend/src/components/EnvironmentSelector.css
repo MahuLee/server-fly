@@ -6,7 +6,8 @@
   box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 [data-theme="tech-dark"] .environment-selector {
@@ -133,9 +134,11 @@
 }
 
 .environment-list {
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
-  max-height: 180px; /* 最多展示两个环境（每个约90px） */
-  padding: 10px 0;
+  overflow-x: hidden;
+  padding: 10px;
 }
 
 /* 自定义滚动条样式 */
@@ -179,17 +182,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
-  margin-bottom: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
   border: 1px solid var(--border-primary);
   border-radius: var(--border-radius-md);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: var(--bg-secondary);
+  background: var(--bg-elevated);
 }
 
 [data-theme="tech-dark"] .environment-item {
-  background: rgba(26, 35, 71, 0.5);
+  background: rgba(31, 41, 82, 0.6);
   border-color: var(--border-secondary);
 }
 

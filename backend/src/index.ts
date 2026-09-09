@@ -504,7 +504,7 @@ app.put('/api/environments/:envId/graph', async (req: Request, res: Response) =>
             expectedStatus: node.properties.healthCheck.expectedStatus || 200
           };
 
-          healthCheckScheduler.registerCheck(node.id, configWithDefaults);
+          healthCheckScheduler.registerCheck(node, configWithDefaults);
           console.log(`Health check registered/updated for node ${node.label} (${node.id})`);
         } catch (error: any) {
           console.error(`Failed to register health check for node ${node.id}:`, error.message);
@@ -1255,7 +1255,7 @@ async function loadAllHealthChecks(): Promise<void> {
         };
         
         // 注册健康检查
-        healthCheckScheduler.registerCheck(node.id, configWithDefaults);
+        healthCheckScheduler.registerCheck(node, configWithDefaults);
         registeredCount++;
         
         logger.info(`  ✓ Registered health check for ${node.label} (${node.id})`);
@@ -1272,7 +1272,7 @@ async function loadAllHealthChecks(): Promise<void> {
     logger.info('Executing initial health checks...');
     const initialCheckPromises = nodesWithHealthCheck.map(async (node) => {
       try {
-        const result = await healthCheckScheduler.executeCheck(node.id);
+        const result = await healthCheckScheduler.executeCheck(node);
         
         // 广播初始状态
         webSocketService.broadcastStateUpdate(node.environment_id, node.id, {

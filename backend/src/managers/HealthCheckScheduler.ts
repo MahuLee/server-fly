@@ -51,14 +51,16 @@ export class HealthCheckScheduler {
 
   /**
    * 注册健康检查任务
-   * @param nodeId 节点ID
+   * @param node 节点对象（包含 id 和 label）
    * @param config 健康检查配置
    */
-  registerCheck(nodeId: string, config: HealthCheckConfig): void {
+  registerCheck(node: { id: string; label: string }, config: HealthCheckConfig): void {
     if (!this.isRunning) {
       logger.warn('HealthCheckScheduler is not running');
       return;
     }
+
+    const nodeId = node.id;
 
     // 如果已存在该节点的任务，先取消
     if (this.tasks.has(nodeId)) {
@@ -71,15 +73,15 @@ export class HealthCheckScheduler {
     // 创建定时任务
     const task = cron.schedule(cronExpression, async () => {
       try {
-        const result = await this.executeCheck(nodeId);
+        const result = await this.executeCheck(node);
         this.notifyCheckComplete(nodeId, result);
       } catch (error) {
-        logger.error(`Health check failed for node ${nodeId}:`, error);
+        logger.error(`Health check failed for node ${node.label} (${nodeId}):`, error);
       }
     });
 
     this.tasks.set(nodeId, task);
-    logger.info(`Health check registered for node ${nodeId} with interval ${config.interval}s`);
+    logger.info(`Health check registered for node ${node.label} (${nodeId}) with interval ${config.interval}s`);
   }
 
   /**
@@ -97,10 +99,11 @@ export class HealthCheckScheduler {
 
   /**
    * 执行单次检查
-   * @param nodeId 节点ID
+   * @param node 节点对象（包含 id 和 label）
    * @returns 健康检查结果
    */
-  async executeCheck(nodeId: string): Promise<HealthCheckResult> {
+  async executeCheck(node: { id: string; label: string }): Promise<HealthCheckResult> {
+    const nodeId = node.id;
     try {
       // 从数据库获取节点的健康检查配置和所有属性
       const nodeResults = query(
@@ -109,7 +112,7 @@ export class HealthCheckScheduler {
          WHERE n.id = ?`,
         [nodeId]
       );
-      logger.info('-----健康检查----->node_id:', nodeId)
+      logger.info('-----健康检查----->node_id:', nodeId, 'label:', node.label)
       if (nodeResults.length === 0) {
         return {
           nodeId,
@@ -178,7 +181,7 @@ export class HealthCheckScheduler {
 
       result.responseTime = Date.now() - startTime;
       result.timestamp = new Date();
-      logger.info('-----健康检查结果----->node_id:', nodeId, result)
+      logger.info('-----健康检查结果----->node_id:', nodeId, 'label:', node.label, result)
       // 更新节点状态
       this.updateNodeState(nodeId, result);
 

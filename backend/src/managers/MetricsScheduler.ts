@@ -114,7 +114,7 @@ export class MetricsScheduler {
     try {
       // 从数据库获取节点配置
       const nodeResults = query(
-        `SELECT properties FROM nodes WHERE id = ?`,
+        `SELECT metrics FROM node_properties WHERE node_id = ?`,
         [nodeId]
       );
 
@@ -122,8 +122,7 @@ export class MetricsScheduler {
         throw new Error(`Node ${nodeId} not found`);
       }
 
-      const properties = JSON.parse(nodeResults[0].properties);
-      const metricsConfig: MetricsConfig = properties.metrics;
+      const metricsConfig: MetricsConfig = nodeResults[0].metrics ? JSON.parse(nodeResults[0].metrics) : null;
 
       if (!metricsConfig) {
         throw new Error(`No metrics config found for node ${nodeId}`);

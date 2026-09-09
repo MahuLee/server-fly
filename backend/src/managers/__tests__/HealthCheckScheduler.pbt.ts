@@ -142,7 +142,7 @@ describe('HealthCheckScheduler - Property-Based Tests', () => {
             };
 
             // 注册检查
-            scheduler.registerCheck(nodeId, config);
+            scheduler.registerCheck({ id: nodeId, label: `Node-${nodeId}` }, config);
 
             // 取消注册检查
             scheduler.unregisterCheck(nodeId);
@@ -171,7 +171,7 @@ describe('HealthCheckScheduler - Property-Based Tests', () => {
 
             // 注册所有检查
             nodeIds.forEach((nodeId, index) => {
-              scheduler.registerCheck(nodeId, configs[index]);
+              scheduler.registerCheck({ id: nodeId, label: `Node-${nodeId}` }, configs[index]);
             });
 
             // 取消注册所有检查

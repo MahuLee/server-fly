@@ -30,7 +30,7 @@ describe('HealthCheckScheduler', () => {
       });
 
       try {
-        const result = await scheduler.executeCheck('test-node-http');
+        const result = await scheduler.executeCheck({ id: 'test-node-http', label: 'Test Node HTTP' });
         expect(result).toBeDefined();
         expect(result.nodeId).toBe('test-node-http');
         // 注意：由于没有配置，这个测试会返回"No health check configuration"
@@ -42,7 +42,7 @@ describe('HealthCheckScheduler', () => {
 
     it('should handle HTTP timeout', async () => {
       // 这个测试验证超时处理逻辑
-      const result = await scheduler.executeCheck('test-node-timeout');
+      const result = await scheduler.executeCheck({ id: 'test-node-timeout', label: 'Test Node Timeout' });
       expect(result).toBeDefined();
       expect(result.nodeId).toBe('test-node-timeout');
     });
@@ -60,7 +60,7 @@ describe('HealthCheckScheduler', () => {
       });
 
       try {
-        const result = await scheduler.executeCheck('test-node-tcp');
+        const result = await scheduler.executeCheck({ id: 'test-node-tcp', label: 'Test Node TCP' });
         expect(result).toBeDefined();
         expect(result.nodeId).toBe('test-node-tcp');
       } finally {
@@ -69,7 +69,7 @@ describe('HealthCheckScheduler', () => {
     });
 
     it('should handle TCP connection error', async () => {
-      const result = await scheduler.executeCheck('test-node-tcp-error');
+      const result = await scheduler.executeCheck({ id: 'test-node-tcp-error', label: 'Test Node TCP Error' });
       expect(result).toBeDefined();
       expect(result.nodeId).toBe('test-node-tcp-error');
     });
@@ -93,7 +93,7 @@ describe('HealthCheckScheduler', () => {
         retries: 3
       };
 
-      scheduler.registerCheck('test-node', config);
+      scheduler.registerCheck({ id: 'test-node', label: 'Test Node' }, config);
       scheduler.unregisterCheck('test-node');
       expect(scheduler).toBeDefined();
     });
@@ -128,7 +128,7 @@ describe('HealthCheckScheduler', () => {
 
       // 应该不抛出错误
       expect(() => {
-        scheduler.registerCheck('test-node', config);
+        scheduler.registerCheck({ id: 'test-node', label: 'Test Node' }, config);
       }).not.toThrow();
 
       scheduler.unregisterCheck('test-node');

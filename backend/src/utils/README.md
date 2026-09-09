@@ -4,7 +4,28 @@
 
 Logger 是一个轻量级的日志工具类，支持分级日志输出，可以通过环境变量 `LOG_LEVEL` 控制日志输出级别。
 
-## 🚀 快速开始
+## � 项目结构
+
+```
+backend/src/utils/
+├── logger.ts            # Logger 核心实现：LogLevel 枚举、Logger 类及单例导出
+├── logger.example.ts    # 使用示例集合：基本用法、数据库、API、WebSocket 等 10 个场景
+├── test-logger.ts       # 功能测试脚本：日志级别过滤、多参数、动态切换、性能测试
+├── INTEGRATION.md       # 集成指南：从 console.log 迁移到 logger 的步骤与代码对照
+└── README.md            # 本文档
+```
+
+### 文件说明
+
+| 文件 | 说明 |
+|------|------|
+| `logger.ts` | 核心模块。定义 `LogLevel` 枚举（ERROR/WARN/INFO/DEBUG）、`Logger` 类（支持级别过滤、彩色输出、动态调整级别），并导出单例 `logger` |
+| `logger.example.ts` | 示例模块。包含 10 个导出函数，覆盖基本使用、数据库操作、API 请求、WebSocket、健康检查、错误处理、定时任务、性能监控、条件日志、动态级别切换等场景 |
+| `test-logger.ts` | 测试脚本。可直接运行（`ts-node src/utils/test-logger.ts`），验证日志级别过滤、多参数输出、实际场景模拟、性能测试和动态级别切换 |
+| `INTEGRATION.md` | 集成文档。提供从 `console.log`/`console.error` 迁移到 `logger` 的详细步骤，含 Express 路由、WebSocket 服务、健康检查、数据库初始化等 6 个代码对照示例 |
+| `README.md` | 本文档。Logger 的完整使用指南 |
+
+## �🚀 快速开始
 
 ### 1. 导入 Logger
 

@@ -262,7 +262,7 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
 
             <div className="drawer-footer">
               <button className="btn btn-cancel" onClick={onClose}>取消</button>
-              <button className="btn btn-primary" onClick={handleSave}>保存</button>
+              <button className="btn btn-primary" onClick={handleSave}>确认</button>
             </div>
           </>
         ) : editedNode.type === 'group' ? (
@@ -441,7 +441,7 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
 
             <div className="drawer-footer">
               <button className="btn btn-cancel" onClick={onClose}>取消</button>
-              <button className="btn btn-primary" onClick={handleSave}>保存</button>
+              <button className="btn btn-primary" onClick={handleSave}>确认</button>
             </div>
           </>
         ) : (
@@ -1178,7 +1178,7 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
 
             <div className="drawer-footer">
               <button className="btn btn-cancel" onClick={onClose}>取消</button>
-              <button className="btn btn-primary" onClick={handleSave}>保存</button>
+              <button className="btn btn-primary" onClick={handleSave}>确认</button>
             </div>
           </>
         )}

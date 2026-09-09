@@ -16,34 +16,119 @@
 
 ```
 .
-├── backend/                 # 后端项目
+├── backend/                          # 后端项目
 │   ├── src/
-│   │   ├── types/          # TypeScript 类型定义
-│   │   ├── database/       # 数据库初始化和管理
-│   │   ├── services/       # 业务逻辑服务
-│   │   ├── routes/         # API 路由
-│   │   └── index.ts        # 应用入口
+│   │   ├── types/                    # TypeScript 类型定义
+│   │   │   └── index.ts
+│   │   ├── database/                 # 数据库初始化
+│   │   │   └── init.ts
+│   │   ├── models/                   # 数据模型
+│   │   │   └── GraphDataModel.ts     # 架构图数据模型
+│   │   ├── managers/                 # 业务逻辑管理器
+│   │   │   ├── ActionExecutor.ts          # 远程操作执行器
+│   │   │   ├── DataCleanupScheduler.ts    # 数据清理调度器
+│   │   │   ├── DataCollector.ts           # 监控指标采集器
+│   │   │   ├── DataPushScheduler.ts       # WebSocket 数据推送调度器
+│   │   │   ├── EnvironmentManager.ts      # 环境管理器
+│   │   │   ├── HealthCheckScheduler.ts    # 健康检查调度器
+│   │   │   ├── MetricsScheduler.ts        # 指标采集调度器
+│   │   │   ├── StatusHistoryManager.ts    # 状态历史管理器
+│   │   │   └── WebSocketService.ts        # WebSocket 服务
+│   │   ├── utils/                    # 工具模块
+│   │   │   ├── logger.ts                  # 分级日志工具
+│   │   │   ├── logger.example.ts          # Logger 使用示例
+│   │   │   ├── test-logger.ts             # Logger 测试脚本
+│   │   │   ├── INTEGRATION.md             # Logger 集成指南
+│   │   │   └── README.md                  # Logger 使用文档
+│   │   ├── __tests__/               # 后端测试
+│   │   │   ├── api.test.ts
+│   │   │   └── api.pbt.ts               # 基于属性的测试
+│   │   └── index.ts                  # 应用入口
+│   ├── migrations/                   # 数据库迁移脚本
+│   │   ├── 001_migrate_status_values.sql
+│   │   └── 001_rollback_status_values.sql
+│   ├── data/                         # 运行时数据
+│   │   └── monitoring.db                  # SQLite 数据库文件
+│   ├── .env.example                  # 环境变量模板
+│   ├── CONFIGURATION.md              # 配置说明
+│   ├── ENV_CONFIG.md                 # 环境变量文档
 │   ├── package.json
 │   ├── tsconfig.json
 │   └── jest.config.js
-├── frontend/                # 前端项目
+├── frontend/                         # 前端项目
 │   ├── src/
-│   │   ├── types/          # TypeScript 类型定义
-│   │   ├── components/     # React 组件
-│   │   ├── services/       # API 服务
-│   │   ├── App.tsx         # 主应用组件
-│   │   └── index.tsx       # 应用入口
+│   │   ├── types/                    # TypeScript 类型定义
+│   │   │   ├── index.ts
+│   │   │   └── uuid.d.ts
+│   │   ├── components/               # React 组件
+│   │   │   ├── nodes/                     # 自定义节点组件
+│   │   │   │   ├── ServerNode.tsx
+│   │   │   │   ├── ServiceNode.tsx
+│   │   │   │   ├── DatabaseNode.tsx
+│   │   │   │   ├── GroupNode.tsx
+│   │   │   │   ├── TextNode.tsx
+│   │   │   │   ├── GenericNode.tsx
+│   │   │   │   ├── NodeStyles.css
+│   │   │   │   └── index.ts
+│   │   │   ├── GraphCanvas.tsx            # 架构图画布
+│   │   │   ├── NodeLibrary.tsx            # 节点库面板
+│   │   │   ├── PropertyPanel.tsx          # 属性面板
+│   │   │   ├── PropertyDrawer.tsx         # 属性抽屉
+│   │   │   ├── MonitoringPanel.tsx        # 监控面板
+│   │   │   ├── MetricsDetailDrawer.tsx    # 指标详情抽屉
+│   │   │   ├── EnvironmentSelector.tsx    # 环境选择器
+│   │   │   ├── CustomEdge.tsx             # 自定义连线
+│   │   │   ├── EdgeStylePanel.tsx         # 连线样式面板
+│   │   │   ├── Toolbar.tsx                # 工具栏
+│   │   │   ├── MainMenu.tsx               # 主菜单
+│   │   │   ├── NodeTooltip.tsx            # 节点提示框
+│   │   │   └── MonitoringView.tsx         # 监控视图组件
+│   │   ├── views/                    # 页面视图
+│   │   │   ├── ArchitectureView.tsx      # 架构编辑视图
+│   │   │   ├── MonitoringViewWrapper.tsx  # 监控一览视图
+│   │   │   └── UnderDevelopmentView.tsx   # 开发中占位视图
+│   │   ├── services/                 # 前端服务
+│   │   │   └── WebSocketService.ts        # WebSocket 客户端
+│   │   ├── config/                   # 配置模块
+│   │   │   ├── api.ts                     # API 地址配置
+│   │   │   ├── menuItems.ts               # 菜单项配置
+│   │   │   ├── metricTemplates.ts         # 指标模板
+│   │   │   └── viewConfig.tsx             # 视图配置
+│   │   ├── contexts/                 # React Context
+│   │   │   └── ViewContext.tsx            # 视图状态上下文
+│   │   ├── hooks/                    # 自定义 Hooks
+│   │   │   └── useWebSocket.ts            # WebSocket Hook
+│   │   ├── utils/                    # 工具函数
+│   │   │   └── apiHelper.ts               # API 请求封装
+│   │   ├── __mocks__/               # 测试 Mock
+│   │   ├── App.tsx                   # 主应用组件
+│   │   ├── App.css
+│   │   ├── index.tsx                 # 应用入口
+│   │   ├── index.css
+│   │   ├── themes.css                # 主题样式
+│   │   └── setupTests.ts             # 测试配置
 │   ├── public/
 │   │   └── index.html
+│   ├── .env.example                  # 环境变量模板
+│   ├── env.template                  # 环境变量模板（完整版）
+│   ├── PORT-CONFIG.md                # 端口配置说明
 │   ├── package.json
 │   ├── tsconfig.json
 │   └── jest.config.js
+├── RUNNING.md                        # 运行指南
+├── WEBSOCKET_QUICKSTART.md           # WebSocket 快速入门
+├── WEBSOCKET_REALTIME_PUSH.md        # WebSocket 实时推送文档
+├── ARCHITECTURE_API_UPDATE.md        # 架构 API 更新说明
+├── PROJECT_UPDATE_SUMMARY.md         # 项目更新摘要
+├── .gitignore
+├── .dockerignore
 └── README.md
 ```
 
 ## 🛠️ 技术栈
 
 ### 后端
+
 - **Runtime**: Node.js 18+
 - **Language**: TypeScript 5.x
 - **Framework**: Express.js 4.x
@@ -54,6 +139,7 @@
 - **Testing**: Jest + fast-check
 
 ### 前端
+
 - **Framework**: React 18.x
 - **Language**: TypeScript 5.x
 - **Flow Diagram**: React Flow 11.x
@@ -63,6 +149,7 @@
 - **Testing**: Jest + React Testing Library
 
 ### 数据库设计
+
 - **环境管理**: environments
 - **架构图**: graph_data, nodes, edges
 - **节点配置**: node_properties
@@ -153,17 +240,19 @@ npm start
 
 ### 端口配置
 
-| 服务 | 默认端口 | 说明 |
-|------|---------|------|
-| 前端 | 3000 | React 开发服务器 |
-| 后端 API | 3001 | Express REST API |
-| WebSocket | 3001 | WebSocket 服务（与 API 共用端口） |
+| 服务      | 默认端口 | 说明                              |
+| --------- | -------- | --------------------------------- |
+| 前端      | 3000     | React 开发服务器                  |
+| 后端 API  | 3001     | Express REST API                  |
+| WebSocket | 3001     | WebSocket 服务（与 API 共用端口） |
 
-**修改端口**: 
+**修改端口**:
+
 - 前端: 在 `frontend/.env` 中设置 `PORT=你的端口号`
 - 后端: 在 `backend/.env` 中设置 `PORT=你的端口号`
 
 详细配置请参考：
+
 - [运行指南](RUNNING.md) - 完整的启动和部署说明
 - [前端端口配置](frontend/PORT-CONFIG.md) - 详细的端口修改方法
 
@@ -181,17 +270,17 @@ npm start
 
 ### 数据库表结构
 
-| 表名 | 说明 | 主要字段 |
-|------|------|---------|
-| `environments` | 环境配置 | id, name, description |
-| `graph_data` | 架构图数据（JSON） | id, environment_id, data |
-| `nodes` | 节点信息 | id, environment_id, type, label, x, y |
-| `node_properties` | 节点属性 | id, node_id, ip, port, health_check, metrics |
-| `node_states` | 节点状态 | id, node_id, status, last_check_time |
-| `metrics_data` | 监控指标数据 | id, node_id, data, timestamp |
-| `status_history` | 状态历史记录 | id, node_id, status, timestamp |
-| `action_logs` | 操作日志 | id, node_id, action_name, result |
-| `edges` | 架构图边 | id, environment_id, source_id, target_id |
+| 表名                | 说明               | 主要字段                                     |
+| ------------------- | ------------------ | -------------------------------------------- |
+| `environments`    | 环境配置           | id, name, description                        |
+| `graph_data`      | 架构图数据（JSON） | id, environment_id, data                     |
+| `nodes`           | 节点信息           | id, environment_id, type, label, x, y        |
+| `node_properties` | 节点属性           | id, node_id, ip, port, health_check, metrics |
+| `node_states`     | 节点状态           | id, node_id, status, last_check_time         |
+| `metrics_data`    | 监控指标数据       | id, node_id, data, timestamp                 |
+| `status_history`  | 状态历史记录       | id, node_id, status, timestamp               |
+| `action_logs`     | 操作日志           | id, node_id, action_name, result             |
+| `edges`           | 架构图边           | id, environment_id, source_id, target_id     |
 
 ### 数据库特性
 
@@ -242,7 +331,7 @@ npm run test:watch
 ### 1. 可视化架构图编辑
 
 - **拖拽式设计**: 直观的拖拽操作，快速构建架构图
-- **多种节点类型**: 
+- **多种节点类型**:
   - 服务器节点 (Server)
   - 服务节点 (Service)
   - 数据库节点 (Database)
@@ -256,7 +345,7 @@ npm run test:watch
 ### 2. 智能配置管理
 
 - **IP 地址自动填充**: 服务节点自动继承所属服务器的 IP 地址
-- **健康检查配置**: 
+- **健康检查配置**:
   - HTTP 检查（支持自定义端点和状态码）
   - TCP 端口检查
   - SSH 脚本检查（支持远程执行）
@@ -266,16 +355,16 @@ npm run test:watch
 
 ### 3. 实时监控系统
 
-- **定期健康检查**: 
+- **定期健康检查**:
   - 可配置检查间隔（最小 10 秒）
   - 支持超时和重试机制
   - 自动记录检查结果
-- **WebSocket 实时推送**: 
+- **WebSocket 实时推送**:
   - 毫秒级状态更新
   - 防抖机制避免频繁推送
   - 心跳检测保持连接
   - 自动重连机制
-- **监控一览界面**: 
+- **监控一览界面**:
   - 实时显示所有节点状态
   - 状态颜色标识（正常/异常/警告/未知）
   - 连接状态指示器
@@ -283,29 +372,29 @@ npm run test:watch
 
 ### 4. 数据收集与展示
 
-- **指标数据收集**: 
+- **指标数据收集**:
   - 通过 SSH 远程采集系统指标
   - 支持自定义采集脚本
   - 自动存储历史数据
-- **状态历史记录**: 
+- **状态历史记录**:
   - 完整的状态变更历史
   - 支持时间范围查询
   - 统计分析功能
-- **操作日志追踪**: 
+- **操作日志追踪**:
   - 记录所有操作执行
   - 包含执行结果和输出
   - 支持审计和回溯
 
 ### 5. 数据同步机制
 
-- **架构图同步**: 
+- **架构图同步**:
   - 更新 `graph_data` 时自动同步到关系表
   - 同步 `nodes`、`node_properties`、`edges` 表
   - 级联删除保证数据一致性
-- **健康检查同步**: 
+- **健康检查同步**:
   - 配置更新时自动注册/取消健康检查
   - 节点删除时自动清理检查任务
-- **数据库自动迁移**: 
+- **数据库自动迁移**:
   - 启动时检测并添加缺失字段
   - 无需手动执行迁移脚本
 
@@ -314,6 +403,7 @@ npm run test:watch
 ### v2.1.0 (2026-02-09)
 
 #### 🐛 Bug 修复
+
 - **WebSocket 调试增强**: 添加详细的日志输出，便于排查推送问题
   - 添加 `[WS]` 前缀标识 WebSocket 相关日志
   - 添加 `[DataPush]` 前缀标识数据推送相关日志
@@ -322,6 +412,7 @@ npm run test:watch
   - 添加消息发送大小统计
 
 #### 📝 文档完善
+
 - 完善 README.md，添加更详细的功能说明
 - 添加 WebSocket 调试指南
 - 添加常见问题解答
@@ -329,12 +420,14 @@ npm run test:watch
 ### v2.0.0 (2026-01-21)
 
 #### 🎯 架构图 API 同步更新
+
 - 更新 `graph_data` 后自动同步 `nodes`、`node_properties`、`edges` 表
 - IP 地址智能填充（服务节点自动从服务器获取 IP）
 - 数据库表结构完善（新增 width、height、ip、port 等字段）
 - 数据库自动迁移功能
 
 #### 📡 WebSocket 实时状态推送
+
 - 后端通过 WebSocket 推送节点状态到前端
 - 监控一览界面实时显示节点状态变化
 - 连接状态指示器（实时监控中/连接已断开）
@@ -343,6 +436,7 @@ npm run test:watch
 - 防抖机制（500ms）避免频繁推送
 
 详细更新说明请查看：
+
 - [项目更新总结](PROJECT_UPDATE_SUMMARY.md)
 - [架构图 API 更新](ARCHITECTURE_API_UPDATE.md)
 - [WebSocket 实时推送](WEBSOCKET_REALTIME_PUSH.md)
@@ -530,50 +624,50 @@ curl http://localhost:3001/health
 
 ### 环境管理
 
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/api/environments` | 获取所有环境 |
-| POST | `/api/environments` | 创建环境 |
-| GET | `/api/environments/:id` | 获取单个环境 |
-| PUT | `/api/environments/:id` | 更新环境 |
-| DELETE | `/api/environments/:id` | 删除环境 |
+| 方法   | 路径                      | 说明         |
+| ------ | ------------------------- | ------------ |
+| GET    | `/api/environments`     | 获取所有环境 |
+| POST   | `/api/environments`     | 创建环境     |
+| GET    | `/api/environments/:id` | 获取单个环境 |
+| PUT    | `/api/environments/:id` | 更新环境     |
+| DELETE | `/api/environments/:id` | 删除环境     |
 
 ### 架构图管理
 
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/api/environments/:envId/graph` | 获取架构图 |
-| PUT | `/api/environments/:envId/graph` | 更新架构图 |
+| 方法 | 路径                               | 说明       |
+| ---- | ---------------------------------- | ---------- |
+| GET  | `/api/environments/:envId/graph` | 获取架构图 |
+| PUT  | `/api/environments/:envId/graph` | 更新架构图 |
 
 ### 节点状态
 
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/api/nodes/:nodeId/status/latest` | 获取最新状态 |
-| GET | `/api/nodes/:nodeId/status/history` | 获取状态历史 |
-| GET | `/api/nodes/:nodeId/status/stats` | 获取状态统计 |
+| 方法 | 路径                                  | 说明         |
+| ---- | ------------------------------------- | ------------ |
+| GET  | `/api/nodes/:nodeId/status/latest`  | 获取最新状态 |
+| GET  | `/api/nodes/:nodeId/status/history` | 获取状态历史 |
+| GET  | `/api/nodes/:nodeId/status/stats`   | 获取状态统计 |
 
 ### 监控数据
 
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/api/nodes/:nodeId/metrics/latest` | 获取最新指标 |
-| GET | `/api/nodes/:nodeId/metrics/history` | 获取指标历史 |
+| 方法 | 路径                                   | 说明         |
+| ---- | -------------------------------------- | ------------ |
+| GET  | `/api/nodes/:nodeId/metrics/latest`  | 获取最新指标 |
+| GET  | `/api/nodes/:nodeId/metrics/history` | 获取指标历史 |
 | POST | `/api/nodes/:nodeId/metrics/collect` | 手动触发采集 |
 
 ### 操作执行
 
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| POST | `/api/nodes/:nodeId/actions/:actionName` | 执行操作 |
-| GET | `/api/nodes/:nodeId/actions/history` | 获取操作历史 |
-| GET | `/api/actions/history` | 获取所有操作历史 |
+| 方法 | 路径                                       | 说明             |
+| ---- | ------------------------------------------ | ---------------- |
+| POST | `/api/nodes/:nodeId/actions/:actionName` | 执行操作         |
+| GET  | `/api/nodes/:nodeId/actions/history`     | 获取操作历史     |
+| GET  | `/api/actions/history`                   | 获取所有操作历史 |
 
 ### WebSocket
 
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/api/websocket/status` | 获取 WebSocket 状态 |
+| 方法 | 路径                      | 说明                |
+| ---- | ------------------------- | ------------------- |
+| GET  | `/api/websocket/status` | 获取 WebSocket 状态 |
 
 详细的 API 请求/响应示例请参考各个功能模块的文档。
 
@@ -642,6 +736,7 @@ private async checkPing(nodeId: string, config: HealthCheckConfig): Promise<Heal
 - `chore`: 构建/工具相关
 
 示例：
+
 ```
 feat: 添加 WebSocket 实时推送功能
 fix: 修复健康检查超时问题
@@ -664,6 +759,7 @@ A: 在 `frontend` 目录下创建 `.env` 文件，添加 `PORT=你的端口号`�
 ### Q: WebSocket 连接不上怎么办？
 
 A: 请检查：
+
 1. 后端服务是否正常运行
 2. 浏览器控制台是否有错误信息
 3. 后端日志中是否有 WebSocket 相关错误
@@ -672,6 +768,7 @@ A: 请检查：
 ### Q: 健康检查不执行怎么办？
 
 A: 请确认：
+
 1. 节点已配置健康检查
 2. 健康检查配置正确（类型、间隔、端点等）
 3. 后端日志中有"Health check registered"信息
@@ -680,6 +777,7 @@ A: 请确认：
 ### Q: 如何查看数据库内容？
 
 A: 使用 SQLite 命令行工具：
+
 ```bash
 sqlite3 backend/data/monitoring.db
 .tables
@@ -689,6 +787,7 @@ SELECT * FROM nodes;
 ### Q: 如何清理历史数据？
 
 A: 系统会自动清理超过保留期的数据（默认30天）。也可以手动触发：
+
 ```bash
 curl -X POST http://localhost:3001/api/admin/cleanup/manual
 ```

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ViewProvider } from '../contexts/ViewContext';
 import EnvironmentSelector from '../components/EnvironmentSelector';
 import NodeLibrary from '../components/NodeLibrary';
@@ -39,14 +39,15 @@ const ArchitectureView: React.FC<ArchitectureViewProps> = ({
   onNodeDeselect,
   onNodeDoubleClick,
 }) => {
+  const [nodeLibraryVisible, setNodeLibraryVisible] = useState(true);
+
   return (
     <ViewProvider mode="architecture">
       <div className={`sidebar-container ${sidebarVisible ? 'visible' : 'hidden'}`}>
         <div className="sidebar">
           <EnvironmentSelector onEnvironmentChange={onEnvironmentChange} />
-          {currentEnvironment && <NodeLibrary />}
         </div>
-        <button 
+        <button
           className="sidebar-toggle-btn"
           onClick={onSidebarToggle}
           title={sidebarVisible ? '隐藏侧边栏' : '显示侧边栏'}
@@ -78,6 +79,24 @@ const ArchitectureView: React.FC<ArchitectureViewProps> = ({
                 onNodeDeselect={onNodeDeselect}
                 onNodeDoubleClick={onNodeDoubleClick}
               />
+              {/* 悬浮节点库面板 */}
+              <div className={`node-library-panel ${nodeLibraryVisible ? 'visible' : 'hidden'}`}>
+                <NodeLibrary />
+              </div>
+              {/* 节点库切换按钮（独立于面板，隐藏时仍可见） */}
+              <button
+                className={`node-library-toggle-btn ${nodeLibraryVisible ? 'visible' : 'hidden'}`}
+                onClick={() => setNodeLibraryVisible(!nodeLibraryVisible)}
+                title={nodeLibraryVisible ? '隐藏节点库' : '显示节点库'}
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  {nodeLibraryVisible ? (
+                    <path d="M9 11L5 7L9 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  ) : (
+                    <path d="M5 3L9 7L5 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  )}
+                </svg>
+              </button>
             </div>
           </div>
         ) : (
