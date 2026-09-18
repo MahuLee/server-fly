@@ -17,7 +17,7 @@ const GroupNode: React.FC<NodeProps<GroupNodeData>> = ({ data, selected, id }) =
   
   // 从 data 中获取自定义属性，提供默认值
   const borderWidth = data.borderWidth || 3;
-  const borderColor = data.borderColor || 'rgba(150, 150, 150, 0.3)';
+  const borderColor = data.borderColor || 'var(--border-secondary)';
   const description = data.description;
 
   return (

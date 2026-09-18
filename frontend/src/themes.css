@@ -1,135 +1,132 @@
 /* ============================================
-   主题系统 - 科技黑 & 简约白
+   主题系统 - Apple 浅色（默认） & Apple 深色
+   浅色调色板写在 :root，深色仅在 [data-theme="apple-dark"] 覆盖。
    ============================================ */
 
 :root {
-  /* 通用变量 */
-  --transition-speed: 0.3s;
-  --border-radius-sm: 4px;
-  --border-radius-md: 8px;
-  --border-radius-lg: 12px;
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
-}
+  /* 动效 token */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --duration-press: 120ms;
+  --duration-fast: 160ms;
+  --duration-base: 220ms;
+  --duration-drawer: 320ms;
 
-/* ============================================
-   科技黑主题 (Tech Dark)
-   ============================================ */
-[data-theme="tech-dark"] {
-  /* 背景色 */
-  --bg-primary: #0a0e27;
-  --bg-secondary: #141b3a;
-  --bg-tertiary: #1a2347;
-  --bg-elevated: #1f2952;
-  --bg-hover: #252f5c;
-  
-  /* 文字色 */
-  --text-primary: #e8eaed;
-  --text-secondary: #9aa0b8;
-  --text-tertiary: #6b7280;
-  --text-inverse: #0a0e27;
-  
-  /* 边框色 */
-  --border-primary: #2d3a5f;
-  --border-secondary: #3d4a6f;
-  --border-accent: #4a90e2;
-  
-  /* 主题色 - 科技蓝紫渐变 */
-  --color-primary: #4a90e2;
-  --color-primary-hover: #5ba3ff;
-  --color-primary-active: #3a7bc8;
-  --color-secondary: #7c3aed;
-  --color-secondary-hover: #8b5cf6;
-  
-  /* 状态色 */
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
-  --color-info: #3b82f6;
-  
-  /* 渐变 */
-  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-secondary: linear-gradient(135deg, #4a90e2 0%, #7c3aed 100%);
-  --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --gradient-bg: linear-gradient(180deg, #0a0e27 0%, #141b3a 100%);
-  
-  /* 发光效果 */
-  --glow-primary: 0 0 20px rgba(74, 144, 226, 0.3);
-  --glow-secondary: 0 0 20px rgba(124, 58, 237, 0.3);
-  --glow-success: 0 0 20px rgba(16, 185, 129, 0.3);
-  
-  /* 网格背景 */
-  --grid-color: rgba(74, 144, 226, 0.1);
-  
-  /* 卡片阴影 */
-  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  --card-shadow-hover: 0 8px 30px rgba(74, 144, 226, 0.2);
-}
+  /* 圆角 */
+  --border-radius-sm: 6px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 16px;
+  --border-radius-pill: 980px;
 
-/* ============================================
-   简约白主题 (Minimalist Light) - 清新有活力
-   ============================================ */
-[data-theme="minimalist"] {
-  /* 背景色 - 清新渐变 */
-  --bg-primary: #f8fafc;
+  /* 背景 */
+  --bg-primary: #f5f5f7;
   --bg-secondary: #ffffff;
-  --bg-tertiary: #f1f5f9;
+  --bg-tertiary: #f5f5f7;
   --bg-elevated: #ffffff;
-  --bg-hover: #e0f2fe;
-  
-  /* 文字色 - 清晰对比 */
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-tertiary: #64748b;
+  --bg-hover: rgba(0, 0, 0, 0.045);
+
+  /* 文字 */
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-tertiary: #86868b;
   --text-inverse: #ffffff;
-  
-  /* 边框色 - 柔和边界 */
-  --border-primary: #e2e8f0;
-  --border-secondary: #cbd5e0;
-  --border-accent: #0ea5e9;
-  
-  /* 主题色 - 活力青蓝 + 翠绿 */
-  --color-primary: #0ea5e9;
-  --color-primary-hover: #0284c7;
-  --color-primary-active: #0369a1;
-  --color-secondary: #14b8a6;
-  --color-secondary-hover: #0d9488;
-  
-  /* 状态色 - 鲜明活力 */
-  --color-success: #22c55e;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
-  --color-info: #06b6d4;
-  
-  /* 渐变 - 清新活力 */
-  --gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
-  --gradient-secondary: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
-  --gradient-accent: linear-gradient(135deg, #f472b6 0%, #fb923c 100%);
-  --gradient-bg: linear-gradient(180deg, #f8fafc 0%, #e0f2fe 100%);
-  --gradient-card: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
-  
-  /* 发光效果 - 柔和光晕 */
-  --glow-primary: 0 0 24px rgba(14, 165, 233, 0.2);
-  --glow-secondary: 0 0 24px rgba(20, 184, 166, 0.2);
-  --glow-success: 0 0 24px rgba(34, 197, 94, 0.2);
-  
-  /* 网格背景 */
-  --grid-color: rgba(14, 165, 233, 0.08);
-  
-  /* 卡片阴影 - 轻盈立体 */
-  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(14, 165, 233, 0.05);
-  --card-shadow-hover: 0 8px 24px rgba(14, 165, 233, 0.15), 0 4px 8px rgba(0, 0, 0, 0.08);
+
+  /* 边框 */
+  --border-primary: rgba(0, 0, 0, 0.09);
+  --border-secondary: rgba(0, 0, 0, 0.18);
+  --separator: rgba(0, 0, 0, 0.09);
+
+  /* 主题色 */
+  --color-primary: #0071e3;
+  --color-primary-hover: #0077ed;
+
+  /* 状态色 */
+  --color-success: #34c759;
+  --color-warning: #ff9f0a;
+  --color-error: #ff3b30;
+
+  /* 扁平化渐变（保持旧变量名，值改为 Apple 竖向微渐变/纯色） */
+  --gradient-primary: linear-gradient(180deg, #0077ed 0%, #0071e3 100%);
+
+  /* 焦点光环（替代原发光） */
+  --glow-primary: 0 0 0 3px rgba(0, 113, 227, 0.25);
+  --focus-ring: rgba(0, 113, 227, 0.5);
+
+  /* 网格 */
+  --grid-color: rgba(0, 0, 0, 0.06);
+
+  /* 阴影 */
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.05);
+  --card-shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.05), 0 12px 28px rgba(0, 0, 0, 0.09);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.1);
+
+  /* 状态淡色底（替代节点状态上的粗渐变） */
+  --tint-success: rgba(52, 199, 89, 0.12);
+  --tint-warning: rgba(255, 159, 10, 0.12);
+  --tint-error: rgba(255, 59, 48, 0.12);
+  --tint-neutral: rgba(0, 0, 0, 0.04);
+  --tint-info: rgba(0, 113, 227, 0.1);
+
+  /* 毛玻璃（导航栏） */
+  --glass-bg: rgba(255, 255, 255, 0.72);
 }
 
 /* ============================================
-   主题切换动画
+   Apple 深色
+   ============================================ */
+[data-theme="apple-dark"] {
+  --bg-primary: #000000;
+  --bg-secondary: #1d1d1f;
+  --bg-tertiary: #161617;
+  --bg-elevated: #1d1d1f;
+  --bg-hover: rgba(255, 255, 255, 0.07);
+
+  --text-primary: #f5f5f7;
+  --text-secondary: #a1a1a6;
+  --text-tertiary: #86868b;
+  --text-inverse: #ffffff;
+
+  --border-primary: rgba(255, 255, 255, 0.14);
+  --border-secondary: rgba(255, 255, 255, 0.24);
+  --separator: rgba(255, 255, 255, 0.14);
+
+  --color-primary: #0a84ff;
+  --color-primary-hover: #409cff;
+
+  --color-success: #30d158;
+  --color-warning: #ffd60a;
+  --color-error: #ff453a;
+
+  --gradient-primary: linear-gradient(180deg, #3da0ff 0%, #0a84ff 100%);
+
+  --glow-primary: 0 0 0 3px rgba(10, 132, 255, 0.35);
+  --focus-ring: rgba(10, 132, 255, 0.6);
+
+  --grid-color: rgba(255, 255, 255, 0.07);
+
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 6px 20px rgba(0, 0, 0, 0.4);
+  --card-shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.5), 0 16px 36px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.55);
+
+  --tint-success: rgba(48, 209, 88, 0.16);
+  --tint-warning: rgba(255, 214, 10, 0.16);
+  --tint-error: rgba(255, 69, 58, 0.16);
+  --tint-neutral: rgba(255, 255, 255, 0.06);
+  --tint-info: rgba(10, 132, 255, 0.16);
+
+  --glass-bg: rgba(29, 29, 31, 0.72);
+}
+
+/* ============================================
+   主题切换过渡
+   只过渡颜色相关属性（阴影过渡昂贵，刻意排除）
    ============================================ */
 * {
-  transition: background-color var(--transition-speed) ease,
-              border-color var(--transition-speed) ease,
-              color var(--transition-speed) ease,
-              box-shadow var(--transition-speed) ease;
+  transition: background-color var(--duration-base) var(--ease-out),
+              border-color var(--duration-base) var(--ease-out),
+              color var(--duration-base) var(--ease-out);
 }
 
 /* 禁用某些元素的过渡 */
@@ -142,203 +139,40 @@ select {
 }
 
 /* ============================================
-   科技黑主题特效
-   ============================================ */
-[data-theme="tech-dark"] .tech-glow {
-  position: relative;
-}
-
-[data-theme="tech-dark"] .tech-glow::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: var(--gradient-secondary);
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: -1;
-  filter: blur(10px);
-}
-
-[data-theme="tech-dark"] .tech-glow:hover::before {
-  opacity: 0.6;
-}
-
-/* 扫描线效果 */
-[data-theme="tech-dark"] .scan-line {
-  position: relative;
-  overflow: hidden;
-}
-
-[data-theme="tech-dark"] .scan-line::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(74, 144, 226, 0.1) 50%,
-    transparent 100%
-  );
-  animation: scan 3s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes scan {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100%);
-  }
-}
-
-/* 网格背景动画 */
-[data-theme="tech-dark"] .grid-bg {
-  background-image: 
-    linear-gradient(var(--grid-color) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-  background-size: 20px 20px;
-  animation: gridMove 20s linear infinite;
-}
-
-@keyframes gridMove {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 20px 20px;
-  }
-}
-
-/* ============================================
-   简约主题特效 - 清新活力
-   ============================================ */
-[data-theme="minimalist"] .minimalist-card {
-  background: var(--gradient-card);
-  border: 1px solid var(--border-primary);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-[data-theme="minimalist"] .minimalist-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--card-shadow-hover);
-  border-color: var(--color-primary);
-}
-
-/* 活力按钮效果 */
-[data-theme="minimalist"] .btn-primary {
-  background: var(--gradient-primary);
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-[data-theme="minimalist"] .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.35);
-}
-
-/* 清新波纹效果 */
-[data-theme="minimalist"] .ripple {
-  position: relative;
-  overflow: hidden;
-}
-
-[data-theme="minimalist"] .ripple::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(14, 165, 233, 0.3);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
-}
-
-[data-theme="minimalist"] .ripple:active::after {
-  width: 300px;
-  height: 300px;
-}
-
-/* 活力脉动动画 */
-@keyframes vibrantPulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 10px rgba(14, 165, 233, 0);
-  }
-}
-
-[data-theme="minimalist"] .vibrant-pulse {
-  animation: vibrantPulse 2s ease-in-out infinite;
-}
-
-/* 清新渐变背景 */
-[data-theme="minimalist"] .fresh-bg {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdfa 100%);
-  background-size: 200% 200%;
-  animation: freshGradient 8s ease infinite;
-}
-
-@keyframes freshGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* 渐变文字 */
-.gradient-text {
-  background: var(--gradient-secondary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
-}
-
-/* ============================================
    通用动画
    ============================================ */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: scale(0.97);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 }
 
-@keyframes slideIn {
+/* 从触发器左上角展开（下拉/右键菜单） */
+@keyframes popIn {
   from {
-    transform: translateX(-100%);
+    opacity: 0;
+    transform: scale(0.97) translateY(-4px);
   }
   to {
-    transform: translateX(0);
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
+/* 居中弹窗（非锚定触发器，保持居中缩放） */
+@keyframes dialogIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
   }
-  50% {
-    opacity: 0.5;
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -351,18 +185,43 @@ select {
   }
 }
 
-.fade-in {
-  animation: fadeIn 0.5s ease-out;
-}
-
-.slide-in {
-  animation: slideIn 0.3s ease-out;
-}
-
-.pulse {
-  animation: pulse 2s ease-in-out infinite;
-}
-
 .spin {
   animation: spin 1s linear infinite;
+}
+
+/* ============================================
+   可访问性
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  /* 保留 opacity/color 过渡（帮助理解状态变化），去掉位移与缩放动画 */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes dialogIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.2s !important;
+  }
+
+  .spin {
+    animation: none;
+  }
+}
+
+/* 键盘可见焦点环 */
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
 }

@@ -87,7 +87,7 @@ describe('GraphCanvas - Property-Based Tests', () => {
                   x: 100,
                   y: 100,
                   properties: {},
-                  state: { status: 'healthy', lastCheckTime: new Date() }
+                  state: { status: 'running', lastCheckTime: new Date() }
                 },
                 {
                   id: targetId,
@@ -96,7 +96,7 @@ describe('GraphCanvas - Property-Based Tests', () => {
                   x: 200,
                   y: 200,
                   properties: {},
-                  state: { status: 'healthy', lastCheckTime: new Date() }
+                  state: { status: 'running', lastCheckTime: new Date() }
                 }
               ],
               edges: [],
@@ -152,7 +152,7 @@ describe('GraphCanvas - Property-Based Tests', () => {
                   x: 100,
                   y: 100,
                   properties: {},
-                  state: { status: 'healthy', lastCheckTime: new Date() }
+                  state: { status: 'running', lastCheckTime: new Date() }
                 },
                 {
                   id: 'other-node',
@@ -161,7 +161,7 @@ describe('GraphCanvas - Property-Based Tests', () => {
                   x: 200,
                   y: 200,
                   properties: {},
-                  state: { status: 'healthy', lastCheckTime: new Date() }
+                  state: { status: 'running', lastCheckTime: new Date() }
                 }
               ],
               edges: [

@@ -5,6 +5,7 @@ import { API_ENDPOINTS } from '../config/api';
 import { handleApiResponse, handleNetworkError } from '../utils/apiHelper';
 import toast from 'react-hot-toast';
 import './PropertyDrawer.css';
+import { CloseIcon, SettingsIcon } from './icons';
 
 interface PropertyDrawerProps {
   visible: boolean;
@@ -28,7 +29,7 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
   // 获取当前主题的默认文本颜色
   const getDefaultTextColor = () => {
     const theme = document.documentElement.getAttribute('data-theme');
-    return theme === 'tech-dark' ? '#e5e7eb' : '#1f2937';
+    return theme === 'apple-dark' ? '#f5f5f7' : '#1d1d1f';
   };
 
   useEffect(() => {
@@ -109,7 +110,9 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
       <div className={`property-drawer ${visible ? 'open' : ''}`}>
         <div className="drawer-header">
           <h3>配置面板</h3>
-          <button className="close-btn" onClick={onClose}>✕</button>
+          <button className="close-btn" onClick={onClose} aria-label="关闭配置面板">
+            <CloseIcon />
+          </button>
         </div>
         
         {/* 文本节点只显示样式配置 */}
@@ -358,7 +361,7 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
                       style={{ flex: 1 }}
                     />
                   </div>
-                  <small style={{ color: '#8c8c8c', fontSize: '12px', marginTop: '4px', display: 'block' }}>
+                  <small style={{ color: 'var(--text-tertiary)', fontSize: '12px', marginTop: '4px', display: 'block' }}>
                     支持 rgba、rgb、hex 格式，例如: rgba(150, 150, 150, 0.3)
                   </small>
                 </div>
@@ -428,7 +431,7 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
                     )}
                     <div style={{
                       textAlign: 'center',
-                      color: '#8c8c8c',
+                      color: 'var(--text-tertiary)',
                       fontSize: '12px',
                       marginTop: editedNode.properties.metadata?.description ? '24px' : '0'
                     }}>
@@ -658,7 +661,7 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
                     placeholder="输入健康检查脚本内容"
                     rows={6}
                   />
-                  <small style={{ color: '#8c8c8c', fontSize: '12px' }}>
+                  <small style={{ color: 'var(--text-tertiary)', fontSize: '12px' }}>
                     提示: 如果所属服务器设置了用户名和密码，系统将通过 SSH 执行 telnet 检查，此字段可不填
                   </small>
                 </div>
@@ -716,7 +719,7 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
                   <option value="push">Push 推送模式（被动接收）</option>
                   <option value="exporter">Exporter 模式（Prometheus）</option>
                 </select>
-                <small style={{ color: '#8c8c8c', fontSize: '12px', marginTop: '4px', display: 'block' }}>
+                <small style={{ color: 'var(--text-tertiary)', fontSize: '12px', marginTop: '4px', display: 'block' }}>
                   {editedNode.properties.metrics?.collectionMode === 'pull' && '后端定时从目标服务拉取指标数据'}
                   {editedNode.properties.metrics?.collectionMode === 'push' && '目标服务主动推送指标数据到监控后端'}
                   {editedNode.properties.metrics?.collectionMode === 'exporter' && '使用 Prometheus Exporter 采集系统级指标'}
@@ -870,9 +873,9 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
                       type="text"
                       value={API_ENDPOINTS.nodeMetricsPush(editedNode.id)}
                       readOnly
-                      style={{ backgroundColor: '#f5f5f5', cursor: 'not-allowed' }}
+                      style={{ backgroundColor: 'var(--bg-tertiary)', cursor: 'not-allowed' }}
                     />
-                    <small style={{ color: '#8c8c8c', fontSize: '12px' }}>
+                    <small style={{ color: 'var(--text-tertiary)', fontSize: '12px' }}>
                       配置到目标服务，让其推送指标数据到此地址
                     </small>
                   </div>
@@ -889,7 +892,7 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
                       })}
                       placeholder="自动生成或手动设置"
                     />
-                    <small style={{ color: '#8c8c8c', fontSize: '12px' }}>
+                    <small style={{ color: 'var(--text-tertiary)', fontSize: '12px' }}>
                       用于验证推送请求的身份
                     </small>
                   </div>
@@ -906,7 +909,7 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
                       })}
                       min="10"
                     />
-                    <small style={{ color: '#8c8c8c', fontSize: '12px' }}>
+                    <small style={{ color: 'var(--text-tertiary)', fontSize: '12px' }}>
                       超过此时间未收到推送将视为异常
                     </small>
                   </div>
@@ -986,7 +989,7 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
                 </div>
 
                 {(!editedNode.properties.metrics?.metrics || editedNode.properties.metrics.metrics.length === 0) && (
-                  <div style={{ padding: '16px', backgroundColor: '#f5f5f5', borderRadius: '4px', textAlign: 'center', color: '#8c8c8c' }}>
+                  <div style={{ padding: '16px', backgroundColor: 'var(--bg-tertiary)', borderRadius: '4px', textAlign: 'center', color: 'var(--text-tertiary)' }}>
                     暂无指标，点击"添加指标"或"应用模板"来配置
                   </div>
                 )}
@@ -1003,6 +1006,8 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
                       <strong>指标 #{index + 1}</strong>
                       <button
                         type="button"
+                        className="btn-remove-metric"
+                        aria-label="删除该指标"
                         onClick={() => {
                           const newMetrics = editedNode.properties.metrics!.metrics.filter((_, i) => i !== index);
                           handlePropertyChange('metrics', {
@@ -1010,20 +1015,13 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
                             metrics: newMetrics
                           });
                         }}
-                        style={{
-                          background: 'transparent',
-                          border: 'none',
-                          color: '#ff4d4f',
-                          cursor: 'pointer',
-                          fontSize: '16px'
-                        }}
                       >
-                        ✕
+                        <CloseIcon size={16} />
                       </button>
                     </div>
 
                     <div style={{ marginBottom: '8px' }}>
-                      <label style={{ fontSize: '12px', color: '#8c8c8c' }}>指标名称</label>
+                      <label style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>指标名称</label>
                       <input
                         type="text"
                         value={metric.name}
@@ -1041,7 +1039,7 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
                     </div>
 
                     <div style={{ marginBottom: '8px' }}>
-                      <label style={{ fontSize: '12px', color: '#8c8c8c' }}>JSON 路径</label>
+                      <label style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>JSON 路径</label>
                       <input
                         type="text"
                         value={metric.path}
@@ -1059,7 +1057,7 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
                     </div>
 
                     <div style={{ marginBottom: '8px' }}>
-                      <label style={{ fontSize: '12px', color: '#8c8c8c' }}>单位</label>
+                      <label style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>单位</label>
                       <input
                         type="text"
                         value={metric.unit}
@@ -1079,11 +1077,11 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
                     {/* 阈值配置 */}
                     <details style={{ marginTop: '12px' }}>
                       <summary style={{ cursor: 'pointer', color: 'var(--color-primary)', fontSize: '13px', userSelect: 'none' }}>
-                        ⚙️ 阈值配置（可选）
+                        <SettingsIcon size={14} /> 阈值配置（可选）
                       </summary>
                       <div style={{ marginTop: '8px', paddingLeft: '8px', borderLeft: '2px solid var(--border-primary)' }}>
                         <div style={{ marginBottom: '8px' }}>
-                          <label style={{ fontSize: '12px', color: '#8c8c8c' }}>Warning 阈值</label>
+                          <label style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>Warning 阈值</label>
                           <input
                             type="number"
                             value={metric.threshold?.warning || ''}
@@ -1109,7 +1107,7 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
                         </div>
 
                         <div style={{ marginBottom: '8px' }}>
-                          <label style={{ fontSize: '12px', color: '#8c8c8c' }}>Critical 阈值</label>
+                          <label style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>Critical 阈值</label>
                           <input
                             type="number"
                             value={metric.threshold?.critical || ''}
@@ -1135,7 +1133,7 @@ export const PropertyDrawer: React.FC<PropertyDrawerProps> = ({
                         </div>
 
                         <div style={{ marginBottom: '8px' }}>
-                          <label style={{ fontSize: '12px', color: '#8c8c8c' }}>比较运算符</label>
+                          <label style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>比较运算符</label>
                           <select
                             value={metric.threshold?.operator || '>'}
                             onChange={(e) => {

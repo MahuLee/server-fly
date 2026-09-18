@@ -9,14 +9,14 @@ import { API_ENDPOINTS } from './config/api';
 import { MENU_ITEMS, MenuItemId } from './config/menuItems';
 import { getViewComponent } from './config/viewConfig';
 
-type Theme = 'tech-dark' | 'minimalist';
+type Theme = 'apple-light' | 'apple-dark';
 
 // 获取默认菜单项（第一个菜单项）
 const DEFAULT_MENU_ITEM = MENU_ITEMS[0]?.id || 'architecture';
 
 function App() {
   const [viewMode, setViewMode] = useState<MenuItemId>(DEFAULT_MENU_ITEM);
-  const [theme, setTheme] = useState<Theme>('tech-dark');
+  const [theme, setTheme] = useState<Theme>('apple-light');
   const [currentEnvironment, setCurrentEnvironment] = useState<Environment | null>(null);
   const [environments, setEnvironments] = useState<Environment[]>([]);
   const [graphData, setGraphData] = useState<GraphData>({ nodes: [], edges: [] });
@@ -263,25 +263,26 @@ function App() {
         toastOptions={{
           duration: 3000,
           style: {
-            background: theme === 'tech-dark' ? '#1f2952' : '#363636',
-            color: '#fff',
+            background: 'var(--bg-elevated)',
+            color: 'var(--text-primary)',
             fontSize: '14px',
-            borderRadius: '8px',
+            borderRadius: 'var(--border-radius-md)',
             padding: '12px 16px',
-            border: theme === 'tech-dark' ? '1px solid #2d3a5f' : 'none',
+            boxShadow: 'var(--card-shadow-hover)',
+            border: '1px solid var(--border-primary)',
           },
           success: {
             duration: 3000,
             iconTheme: {
-              primary: '#10b981',
-              secondary: '#fff',
+              primary: 'var(--color-success)',
+              secondary: 'var(--bg-elevated)',
             },
           },
           error: {
             duration: 4000,
             iconTheme: {
-              primary: '#ef4444',
-              secondary: '#fff',
+              primary: 'var(--color-error)',
+              secondary: 'var(--bg-elevated)',
             },
           },
         }}
@@ -291,14 +292,18 @@ function App() {
         <div className="header-right">
           <div className="theme-switcher">
             <span className="theme-label">
-              {theme === 'tech-dark' ? '科技黑' : '简约白'}
+              {theme === 'apple-dark' ? '深色' : '浅色'}
             </span>
-            <div 
-              className="theme-switch" 
-              onClick={() => setTheme(theme === 'tech-dark' ? 'minimalist' : 'tech-dark')}
+            <button
+              type="button"
+              role="switch"
+              aria-checked={theme === 'apple-dark'}
+              aria-label="切换深色外观"
+              className="theme-switch"
+              onClick={() => setTheme(theme === 'apple-dark' ? 'apple-light' : 'apple-dark')}
             >
-              <div className="theme-switch-slider" />
-            </div>
+              <span className="theme-switch-slider" />
+            </button>
           </div>
           <div className={`connection-status ${isConnected ? 'connected' : 'disconnected'}`}>
           {currentEnvironment ? (
@@ -323,16 +328,16 @@ function App() {
                   <polyline
                     points="0,12 10,12 15,4 20,20 25,12 35,12 40,4 45,20 50,12 60,12"
                     fill="none"
-                    stroke={theme === 'tech-dark' ? 'rgba(20, 27, 58, 0.6)' : 'rgba(248, 250, 252, 0.6)'}
+                    stroke="var(--border-primary)"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
-                  {/* 前景折线 - 亮绿色，带进度遮罩 */}
+                  {/* 前景折线 - 绿色，带进度遮罩 */}
                   <polyline
                     points="0,12 10,12 15,4 20,20 25,12 35,12 40,4 45,20 50,12 60,12"
                     fill="none"
-                    stroke="#10b981"
+                    stroke="var(--color-success)"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -342,32 +347,32 @@ function App() {
                 </>
               ) : (
                 <>
-                  {/* 背景直线 - 暗红色 */}
+                  {/* 背景直线 */}
                   <line
                     x1="0"
                     y1="12"
                     x2="60"
                     y2="12"
-                    stroke="rgba(238, 14, 14, 0.9)"
+                    stroke="var(--border-primary)"
                     strokeWidth="2"
                     strokeLinecap="round"
                   />
-                  {/* 前景直线 - 深红色，带进度遮罩 */}
+                  {/* 前景直线 - 红色，带进度遮罩 */}
                   <line
                     x1="0"
                     y1="12"
                     x2="60"
                     y2="12"
-                    stroke="#dc2626"
+                    stroke="var(--color-error)"
                     strokeWidth="2"
                     strokeLinecap="round"
                     className="flatline"
                     mask="url(#progressMask)"
                   />
-                  {/* 淡白色光点 - 从左向右移动 */}
+                  {/* 光点 - 从左向右移动 */}
                   <circle
                     r="3"
-                    fill="rgba(196, 176, 176, 0.8)"
+                    fill="var(--text-tertiary)"
                     className="flatline-dot"
                   >
                     <animate
@@ -388,7 +393,7 @@ function App() {
               )}
             </svg>
           ) : (
-            <span style={{ fontSize: '12px', color: '#6b7280' }}>未选择环境</span>
+            <span style={{ fontSize: '12px', color: 'var(--text-tertiary)' }}>未选择环境</span>
           )}
           </div>
         </div>

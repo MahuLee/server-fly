@@ -5,6 +5,7 @@ import NodeLibrary from '../components/NodeLibrary';
 import Toolbar from '../components/Toolbar';
 import GraphCanvas from '../components/GraphCanvas';
 import { Environment, GraphData } from '../types';
+import { RocketIcon } from '../components/icons';
 
 interface ArchitectureViewProps {
   currentEnvironment: Environment | null;
@@ -52,7 +53,7 @@ const ArchitectureView: React.FC<ArchitectureViewProps> = ({
           onClick={onSidebarToggle}
           title={sidebarVisible ? '隐藏侧边栏' : '显示侧边栏'}
         >
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
             {sidebarVisible ? (
               <path d="M8 10L4 6L8 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             ) : (
@@ -89,7 +90,7 @@ const ArchitectureView: React.FC<ArchitectureViewProps> = ({
                 onClick={() => setNodeLibraryVisible(!nodeLibraryVisible)}
                 title={nodeLibraryVisible ? '隐藏节点库' : '显示节点库'}
               >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                   {nodeLibraryVisible ? (
                     <path d="M9 11L5 7L9 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   ) : (
@@ -101,6 +102,7 @@ const ArchitectureView: React.FC<ArchitectureViewProps> = ({
           </div>
         ) : (
           <div className="empty-workspace">
+            <RocketIcon size={48} strokeWidth={1} className="empty-workspace-icon" />
             <p>请选择一个环境开始设计架构图</p>
           </div>
         )}

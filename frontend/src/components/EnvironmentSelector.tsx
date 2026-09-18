@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { Environment, ApiResponse } from '../types';
 import { API_BASE_URL } from '../config/api';
 import './EnvironmentSelector.css';
+import { GlobeIcon, CloseIcon } from './icons';
 
 interface EnvironmentSelectorProps {
   onEnvironmentChange?: (env: Environment) => void;
@@ -177,7 +178,10 @@ const EnvironmentSelector: React.FC<EnvironmentSelectorProps> = ({
   return (
     <div className="environment-selector">
       <div className="environment-selector-header">
-        <h3>环境</h3>
+        <h3>
+          <GlobeIcon size={18} />
+          环境
+        </h3>
         <button
           className="btn-create"
           onClick={() => setShowCreateDialog(true)}
@@ -190,7 +194,9 @@ const EnvironmentSelector: React.FC<EnvironmentSelectorProps> = ({
       {error && (
         <div className="error-message">
           {error}
-          <button onClick={() => setError(null)}>×</button>
+          <button onClick={() => setError(null)} aria-label="关闭提示">
+            <CloseIcon size={16} />
+          </button>
         </div>
       )}
 
@@ -217,8 +223,12 @@ const EnvironmentSelector: React.FC<EnvironmentSelectorProps> = ({
                   openEditDialog(env);
                 }}
                 title="编辑"
+                aria-label={`编辑 ${env.name}`}
               >
-                ✎
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M4 20h4L19 9a2.1 2.1 0 0 0-3-3L5 17v3z" />
+                  <path d="M14.5 6.5l3 3" />
+                </svg>
               </button>
               <button
                 className="btn-delete"
@@ -227,8 +237,12 @@ const EnvironmentSelector: React.FC<EnvironmentSelectorProps> = ({
                   deleteEnvironment(env.id);
                 }}
                 title="删除"
+                aria-label={`删除 ${env.name}`}
               >
-                🗑
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13" />
+                  <path d="M10 11v6M14 11v6" />
+                </svg>
               </button>
             </div>
           </div>

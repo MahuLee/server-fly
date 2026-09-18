@@ -1,62 +1,36 @@
 /* ============================================
-   Main Menu - 横向菜单
+   Main Menu - 横向菜单（Apple 风格）
    ============================================ */
 .main-menu {
   display: flex;
   align-items: center;
-  gap: 0;
+  gap: 4px;
   background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-primary);
-  padding: 0 32px;
-  height: 56px;
+  border-bottom: 1px solid var(--separator);
+  padding: 0 24px;
+  height: 52px;
   position: relative;
   z-index: 99;
 }
 
-[data-theme="tech-dark"] .main-menu {
-  background: rgba(20, 27, 58, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
-}
-
-[data-theme="minimalist"] .main-menu {
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.06);
-}
-
 .menu-item {
-  padding: 16px 32px;
+  padding: 8px 14px;
   background: transparent;
   border: none;
   color: var(--text-secondary);
-  font-size: 15px;
+  font-family: inherit;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 0;
+  transition: background-color var(--duration-fast) ease,
+              color var(--duration-fast) ease,
+              transform var(--duration-press) var(--ease-out);
+  border-radius: var(--border-radius-sm);
   position: relative;
-  overflow: hidden;
   display: flex;
   align-items: center;
-  gap: 8px;
-  height: 100%;
-  border-bottom: 3px solid transparent;
-}
-
-[data-theme="tech-dark"] .menu-item {
-  font-family: 'Orbitron', monospace;
-  letter-spacing: 0.5px;
-}
-
-.menu-item::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 3px;
-  background: var(--gradient-secondary);
-  transition: all 0.3s ease;
+  gap: 7px;
+  height: 36px;
 }
 
 .menu-item:hover {
@@ -64,44 +38,16 @@
   background: var(--bg-hover);
 }
 
-[data-theme="tech-dark"] .menu-item:hover {
-  background: rgba(74, 144, 226, 0.1);
-}
-
-[data-theme="minimalist"] .menu-item:hover {
-  background: linear-gradient(135deg, #e0f2fe 0%, #ccfbf1 100%);
+.menu-item:active {
+  transform: scale(0.97);
 }
 
 .menu-item.active {
   color: var(--color-primary);
-  background: var(--bg-elevated);
   font-weight: 600;
 }
 
-[data-theme="tech-dark"] .menu-item.active {
-  background: rgba(74, 144, 226, 0.15);
-}
-
-[data-theme="minimalist"] .menu-item.active {
-  background: linear-gradient(135deg, #e0f2fe 0%, #ccfbf1 100%);
-  color: var(--color-primary);
-}
-
-.menu-item.active::before {
-  width: 100%;
-}
-
-[data-theme="tech-dark"] .menu-item.active::before {
-  background: var(--color-primary);
-  box-shadow: 0 0 12px var(--color-primary);
-}
-
-[data-theme="minimalist"] .menu-item.active::before {
-  background: linear-gradient(90deg, #0ea5e9 0%, #14b8a6 100%);
-}
-
 .menu-item-icon {
-  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,6 +57,20 @@
   white-space: nowrap;
 }
 
+/* 入场 stagger（30ms 步进，上限 8 项） */
+.menu-item {
+  animation: fadeIn var(--duration-base) var(--ease-out) both;
+}
+
+.menu-item:nth-child(1) { animation-delay: 0ms; }
+.menu-item:nth-child(2) { animation-delay: 30ms; }
+.menu-item:nth-child(3) { animation-delay: 60ms; }
+.menu-item:nth-child(4) { animation-delay: 90ms; }
+.menu-item:nth-child(5) { animation-delay: 120ms; }
+.menu-item:nth-child(6) { animation-delay: 150ms; }
+.menu-item:nth-child(7) { animation-delay: 180ms; }
+.menu-item:nth-child(n + 8) { animation-delay: 210ms; }
+
 /* 响应式设计 */
 @media (max-width: 1200px) {
   .main-menu {
@@ -119,12 +79,8 @@
   }
 
   .menu-item {
-    padding: 12px 24px;
-    font-size: 14px;
-  }
-  
-  .menu-item-icon {
-    font-size: 16px;
+    padding: 8px 12px;
+    font-size: 13px;
   }
 }
 
@@ -135,12 +91,8 @@
   }
 
   .menu-item {
-    padding: 10px 16px;
+    padding: 8px 10px;
     font-size: 13px;
     gap: 6px;
-  }
-  
-  .menu-item-icon {
-    font-size: 14px;
   }
 }

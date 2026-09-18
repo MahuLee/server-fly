@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './EdgeStylePanel.css';
+import { CloseIcon } from './icons';
 
 export interface EdgeStyle {
   strokeWidth: number;
@@ -79,7 +80,9 @@ const EdgeStylePanel: React.FC<EdgeStylePanelProps> = ({
       <div className={`edge-style-drawer ${visible ? 'open' : ''}`}>
         <div className="drawer-header">
           <h3>边样式设置</h3>
-          <button className="close-btn" onClick={onClose}>×</button>
+          <button className="close-btn" onClick={onClose} aria-label="关闭边样式设置">
+            <CloseIcon />
+          </button>
         </div>
 
         <div className="drawer-content">

@@ -38,7 +38,7 @@ describe('GraphCanvas Component', () => {
         y: 100,
         properties: {},
         state: {
-          status: 'healthy',
+          status: 'running',
           lastCheckTime: new Date()
         }
       }
@@ -131,7 +131,7 @@ describe('GraphCanvas Component', () => {
           y: 200,
           properties: {},
           state: {
-            status: 'unhealthy',
+            status: 'error',
             lastCheckTime: new Date()
           }
         }

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { MetricData } from '../types';
 import { API_ENDPOINTS } from '../config/api';
+import { CHART_COLORS, metricStatusColor } from '../config/chartTheme';
+import { CloseIcon } from './icons';
 import './MetricsDetailDrawer.css';
 
 interface MetricsDetailDrawerProps {
@@ -91,13 +93,8 @@ export const MetricsDetailDrawer: React.FC<MetricsDetailDrawerProps> = ({
   };
 
   // 获取指标的颜色
-  const getMetricColor = (status: 'normal' | 'warning' | 'critical'): string => {
-    switch (status) {
-      case 'critical': return '#ff4d4f';
-      case 'warning': return '#faad14';
-      default: return '#52c41a';
-    }
-  };
+  const getMetricColor = (status: 'normal' | 'warning' | 'critical'): string =>
+    metricStatusColor(status);
 
   // 格式化数值显示
   const formatValue = (value: number, unit: string): string => {
@@ -137,7 +134,7 @@ export const MetricsDetailDrawer: React.FC<MetricsDetailDrawerProps> = ({
     }).join(' ');
 
     const currentMetric = metrics.find(m => m.name === metricName);
-    const color = currentMetric ? getMetricColor(getThresholdStatus(currentMetric)) : '#1890ff';
+    const color = currentMetric ? getMetricColor(getThresholdStatus(currentMetric)) : CHART_COLORS.accent;
 
     return (
       <svg width={width} height={height} style={{ display: 'block' }}>
@@ -171,7 +168,7 @@ export const MetricsDetailDrawer: React.FC<MetricsDetailDrawerProps> = ({
       ctx.clearRect(0, 0, width, height);
 
       // 绘制背景网格
-      ctx.strokeStyle = '#e8e8e8';
+      ctx.strokeStyle = CHART_COLORS.grid;
       ctx.lineWidth = 1;
       for (let i = 0; i <= 4; i++) {
         const y = (height / 4) * i;
@@ -188,7 +185,7 @@ export const MetricsDetailDrawer: React.FC<MetricsDetailDrawerProps> = ({
       const range = max - min || 1;
 
       const currentMetric = metrics.find(m => m.name === metricName);
-      const color = currentMetric ? getMetricColor(getThresholdStatus(currentMetric)) : '#1890ff';
+      const color = currentMetric ? getMetricColor(getThresholdStatus(currentMetric)) : CHART_COLORS.accent;
 
       ctx.strokeStyle = color;
       ctx.lineWidth = 2;
@@ -208,7 +205,7 @@ export const MetricsDetailDrawer: React.FC<MetricsDetailDrawerProps> = ({
       ctx.stroke();
 
       // 绘制最大最小值标签
-      ctx.fillStyle = '#595959';
+      ctx.fillStyle = CHART_COLORS.axis;
       ctx.font = '12px sans-serif';
       ctx.fillText(`${max.toFixed(1)}`, 5, 15);
       ctx.fillText(`${min.toFixed(1)}`, 5, height - 5);
@@ -220,9 +217,9 @@ export const MetricsDetailDrawer: React.FC<MetricsDetailDrawerProps> = ({
         <div style={{
           padding: '40px',
           textAlign: 'center',
-          color: '#8c8c8c',
-          background: '#f5f5f5',
-          borderRadius: '4px'
+          color: 'var(--text-tertiary)',
+          background: 'var(--bg-tertiary)',
+          borderRadius: 'var(--border-radius-md)'
         }}>
           暂无历史数据
         </div>
@@ -249,7 +246,9 @@ export const MetricsDetailDrawer: React.FC<MetricsDetailDrawerProps> = ({
             <h3>{nodeName}</h3>
             <span className="node-type-badge">{nodeType}</span>
           </div>
-          <button className="close-btn" onClick={onClose}>✕</button>
+          <button className="close-btn" onClick={onClose} aria-label="关闭监控详情">
+            <CloseIcon />
+          </button>
         </div>
 
         {/* 抽屉内容 */}

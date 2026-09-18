@@ -1,5 +1,6 @@
 import React from 'react';
 import './Toolbar.css';
+import { SaveIcon, ImportIcon, ExportIcon, RefreshIcon } from './icons';
 
 interface ToolbarProps {
   onSave?: () => void;
@@ -33,7 +34,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           disabled={disabled || !onSave}
           title="保存架构图"
         >
-          <span className="toolbar-icon">💾</span>
+          <span className="toolbar-icon"><SaveIcon /></span>
           <span className="toolbar-label">保存</span>
         </button>
 
@@ -44,7 +45,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
             disabled={disabled || !onExport}
             title="导出架构图"
           >
-            <span className="toolbar-icon">📥</span>
+            <span className="toolbar-icon"><ExportIcon /></span>
             <span className="toolbar-label">导出</span>
             <span className="toolbar-arrow">▼</span>
           </button>
@@ -87,7 +88,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           disabled={disabled || !onImport}
           title="导入架构图"
         >
-          <span className="toolbar-icon">📤</span>
+          <span className="toolbar-icon"><ImportIcon /></span>
           <span className="toolbar-label">导入</span>
         </button>
 
@@ -97,7 +98,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
           disabled={disabled || !onRefresh}
           title="刷新数据"
         >
-          <span className="toolbar-icon">🔄</span>
+          <span className="toolbar-icon"><RefreshIcon /></span>
           <span className="toolbar-label">刷新</span>
         </button>
       </div>

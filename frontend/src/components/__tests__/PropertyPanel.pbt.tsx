@@ -224,6 +224,7 @@ describe('PropertyPanel - Property 7: Node Properties Persistence Round-Trip Con
         (metricsData) => {
           const originalProperties: NodeProperties = {
             metrics: {
+              collectionMode: 'pull',
               endpoint: metricsData.endpoint,
               interval: metricsData.interval,
               metrics: [

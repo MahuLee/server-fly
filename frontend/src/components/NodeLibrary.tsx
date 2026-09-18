@@ -1,5 +1,17 @@
 import React from 'react';
 import './NodeLibrary.css';
+import {
+  ServerIcon,
+  ServiceIcon,
+  DatabaseIcon,
+  CacheIcon,
+  QueueIcon,
+  GatewayIcon,
+  BalanceIcon,
+  BoxIcon,
+  FolderIcon,
+  TextIcon,
+} from './icons';
 
 /**
  * 节点类型定义
@@ -7,7 +19,7 @@ import './NodeLibrary.css';
 interface NodeType {
   type: string;
   label: string;
-  icon: string;
+  icon: React.ReactNode;
   description: string;
 }
 
@@ -18,61 +30,61 @@ const NODE_TYPES: NodeType[] = [
   {
     type: 'server',
     label: '服务器',
-    icon: '🖥️',
+    icon: <ServerIcon size={24} />,
     description: '物理服务器或虚拟机'
   },
   {
     type: 'service',
     label: '服务',
-    icon: '⚙️',
+    icon: <ServiceIcon size={24} />,
     description: 'Web 服务或 API'
   },
   {
     type: 'database',
     label: '数据库',
-    icon: '🗄️',
+    icon: <DatabaseIcon size={24} />,
     description: '数据库服务'
   },
   {
     type: 'cache',
     label: '缓存',
-    icon: '💾',
+    icon: <CacheIcon size={24} />,
     description: '缓存服务'
   },
   {
     type: 'queue',
     label: '消息队列',
-    icon: '📬',
+    icon: <QueueIcon size={24} />,
     description: '消息队列服务'
   },
   {
     type: 'gateway',
     label: '网关',
-    icon: '🚪',
+    icon: <GatewayIcon size={24} />,
     description: 'API 网关'
   },
   {
     type: 'loadbalancer',
     label: '负载均衡',
-    icon: '⚖️',
+    icon: <BalanceIcon size={24} />,
     description: '负载均衡器'
   },
   {
     type: 'custom',
     label: '自定义',
-    icon: '📦',
+    icon: <BoxIcon size={24} />,
     description: '自定义节点'
   },
   {
     type: 'group',
     label: '群组',
-    icon: '📁',
+    icon: <FolderIcon size={24} />,
     description: '用于圈定不同的组'
   },
   {
     type: 'text',
     label: '文本',
-    icon: '📝',
+    icon: <TextIcon size={24} />,
     description: '文本标注'
   }
 ];
@@ -100,7 +112,10 @@ export const NodeLibrary: React.FC<NodeLibraryProps> = ({ onNodeTypeSelect }) =>
   return (
     <div className="node-library">
       <div className="node-library-header">
-        <h3>节点库</h3>
+        <h3>
+          <BoxIcon size={18} />
+          节点库
+        </h3>
         <p className="node-library-hint">拖拽节点到画布</p>
       </div>
       <div className="node-library-content">

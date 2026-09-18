@@ -13,6 +13,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { MetricData } from '../types';
 import './MonitoringPanel.css';
+import { CHART_COLORS } from '../config/chartTheme';
 
 // 注册 Chart.js 组件
 ChartJS.register(
@@ -161,8 +162,8 @@ export const MonitoringPanel: React.FC<MonitoringPanelProps> = ({
         {
           label: selectedMetric,
           data: sortedData.map(m => m.value),
-          borderColor: 'rgb(75, 192, 192)',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: CHART_COLORS.accent,
+          backgroundColor: CHART_COLORS.accentFill,
           tension: 0.1
         }
       ]
@@ -174,16 +175,24 @@ export const MonitoringPanel: React.FC<MonitoringPanelProps> = ({
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'top' as const
+        position: 'top' as const,
+        labels: { color: CHART_COLORS.axis, boxWidth: 12, boxHeight: 2 }
       },
       title: {
         display: true,
-        text: selectedMetric ? `${selectedMetric} 历史趋势` : '指标历史趋势'
+        text: selectedMetric ? `${selectedMetric} 历史趋势` : '指标历史趋势',
+        color: CHART_COLORS.axis
       }
     },
     scales: {
+      x: {
+        grid: { color: CHART_COLORS.grid },
+        ticks: { color: CHART_COLORS.axis }
+      },
       y: {
-        beginAtZero: true
+        beginAtZero: true,
+        grid: { color: CHART_COLORS.grid },
+        ticks: { color: CHART_COLORS.axis }
       }
     }
   };

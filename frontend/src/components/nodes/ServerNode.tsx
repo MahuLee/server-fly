@@ -30,7 +30,7 @@ const ServerNode: React.FC<NodeProps<ServerNodeData>> = ({ data, selected, id })
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
         background: 'transparent',
-        border: selected ? '4px dashed var(--color-primary)' : '4px dashed rgba(143, 134, 134, 0.3)',
+        border: selected ? '4px dashed var(--color-primary)' : '4px dashed var(--border-secondary)',
         pointerEvents: 'none', // 内部不响应点击
       }}
     >

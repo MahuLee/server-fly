@@ -4,6 +4,7 @@ import GraphCanvas from './GraphCanvas';
 import MetricsDetailDrawer from './MetricsDetailDrawer';
 import { useWebSocket } from '../hooks/useWebSocket';
 import { API_ENDPOINTS } from '../config/api';
+import { GlobeIcon, MonitorIcon, SearchIcon } from './icons';
 import './MonitoringView.css';
 
 interface MonitoringViewProps {
@@ -199,7 +200,10 @@ export const MonitoringView: React.FC<MonitoringViewProps> = ({
     <div className="monitoring-view">
       <div className={`monitoring-sidebar-container ${sidebarVisible ? 'visible' : 'hidden'}`}>
         <div className="monitoring-sidebar">
-          <h3>环境列表</h3>
+          <h3>
+            <GlobeIcon size={18} />
+            环境列表
+          </h3>
           <div className="environment-list">
             {environments.map(env => (
               <div
@@ -254,6 +258,7 @@ export const MonitoringView: React.FC<MonitoringViewProps> = ({
             <div className="monitoring-graph-container">
               {loading && (
                 <div className="empty-graph-state">
+                  <MonitorIcon size={48} strokeWidth={1} className="empty-icon" />
                   <p>正在加载...</p>
                 </div>
               )}
@@ -270,6 +275,7 @@ export const MonitoringView: React.FC<MonitoringViewProps> = ({
               )}
               {!loading && graphData && graphData.nodes.length === 0 && (
                 <div className="empty-graph-state">
+                  <SearchIcon size={48} strokeWidth={1} className="empty-icon" />
                   <p>该环境暂无服务节点，请先在"服务架构"中添加节点</p>
                 </div>
               )}
@@ -277,6 +283,7 @@ export const MonitoringView: React.FC<MonitoringViewProps> = ({
           </>
         ) : (
           <div className="empty-state">
+            <MonitorIcon size={48} strokeWidth={1} className="empty-icon" />
             <p>请选择一个环境查看监控信息</p>
           </div>
         )}

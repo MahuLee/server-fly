@@ -1,4 +1,5 @@
 import { MenuItem } from '../components/MainMenu';
+import { MonitorIcon, LayersIcon, DocIcon, BellIcon } from '../components/icons';
 
 /**
  * 主菜单配置
@@ -8,23 +9,23 @@ export const MENU_ITEMS: MenuItem[] = [
   {
     id: 'monitoring',
     label: '监控一览',
-    icon: '📊',
+    icon: <MonitorIcon />,
   },
   {
     id: 'architecture',
     label: '服务架构',
-    icon: '🏗️',
+    icon: <LayersIcon />,
   },
   // 未来可以在这里添加更多菜单项，例如：
   {
     id: 'logs',
     label: '日志查询',
-    icon: '📝',
+    icon: <DocIcon />,
   },
   {
     id: 'alerts',
     label: '告警管理',
-    icon: '🔔',
+    icon: <BellIcon />,
   },
 ];
 

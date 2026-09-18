@@ -27,7 +27,7 @@ describe('PropertyPanel Component - Validation Logic', () => {
       }
     },
     state: {
-      status: 'healthy',
+      status: 'running',
       lastCheckTime: new Date()
     }
   };
@@ -77,6 +77,7 @@ describe('PropertyPanel Component - Validation Logic', () => {
       ...mockNode,
       properties: {
         metrics: {
+          collectionMode: 'pull',
           endpoint: 'http://localhost:9090/metrics',
           interval: 60,
           metrics: [
@@ -169,6 +170,7 @@ describe('PropertyPanel Component - Validation Logic', () => {
           retries: 2
         },
         metrics: {
+          collectionMode: 'pull',
           endpoint: 'http://localhost:9090/metrics',
           interval: 60,
           metrics: [
